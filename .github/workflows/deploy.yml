@@ -37,11 +37,6 @@ on:
         required: true
         type: boolean
         default: true
-      deploy_to_cf:
-        description: Whether to deploy to CurseForge.
-        required: true
-        type: boolean
-        default: true
 
 jobs:
   build:
@@ -61,16 +56,6 @@ jobs:
     if: ${{ inputs.deploy_to_gh }}
     needs: build
     uses: ./.github/workflows/deploygh.yml
-    with:
-      tag: ${{ inputs.tag }}
-      release_type: ${{ inputs.release_type }}
-    secrets: inherit
-
-  deployCF:
-    name: Deploy to CurseForge (${{ inputs.tag }})
-    if: ${{ inputs.deploy_to_cf }}
-    needs: build
-    uses: ./.github/workflows/deploycf.yml
     with:
       tag: ${{ inputs.tag }}
       release_type: ${{ inputs.release_type }}
