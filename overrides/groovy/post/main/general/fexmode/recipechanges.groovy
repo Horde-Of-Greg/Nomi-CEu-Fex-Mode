@@ -12,3 +12,16 @@ crafting.shapedBuilder()
     .key('P', metaitem('plateDiamond'))
     .register()
 
+//Vacuum Tube steel bolts -> steel rods
+crafting.remove('gregtech:vacuum_tube')
+crafting.shapedBuilder()
+    .output(metaitem('circuit.vacuum_tube'))
+    .matrix(
+        '   ',
+        'RGR',
+        'WWW')
+    .key('R', metaitem('stickSteel'))
+    .key('G', metaitem('component.glass.tube'))
+    .key('W', ore('wireGtSingleCopper'))
+    .register()
+

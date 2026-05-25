@@ -7,3 +7,11 @@ for (var converter_id: ['1670', '1671', '1672', '1673', '1674', '1675', '1676', 
     //mods.jei.ingredient.hide(metaname) comment cuz maybe i wanna add this
     crafting.removeByOutput([converters_all])
 }
+
+//remove fine wire recipes for basic resistors
+crafting.remove('gregtech:resistor_wire_fine')
+crafting.remove('gregtech:resistor_wire_fine_charcoal')
+crafting.remove('gregtech:resistor_wire_fine_carbon')
+
+
+

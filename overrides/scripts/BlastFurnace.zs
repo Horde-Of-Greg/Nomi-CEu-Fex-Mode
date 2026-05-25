@@ -66,21 +66,23 @@ blast_furnace.recipeBuilder()
 // Aluminium Ingot * 1
 <recipemap:electric_blast_furnace>.findRecipe(120, [<metaitem:dustAluminium>, <metaitem:circuit.integrated>.withTag({Configuration: 1})], null).remove();
 
+//changed from 20s to 300s
 blast_furnace.recipeBuilder()
 	.inputs([<metaitem:dustAluminium>])
 	.outputs([<metaitem:ingotAluminium>])
 	.circuit(1)
 	.property("temperature", 1700)
-	.duration(400).EUt(120)
+	.duration(6000).EUt(120)
 	.buildAndRegister();
 
+//changed from 13s at mv to 50s at hv
 blast_furnace.recipeBuilder()
 	.inputs([<metaitem:dustAluminium>])
 	.fluidInputs(<liquid:nitrogen> * 1000)
 	.circuit(2)
 	.outputs([<metaitem:ingotAluminium>])
-	.property("temperature", 1700)
-	.duration(270).EUt(120)
+	.property("temperature", 3200)
+	.duration(1000).EUt(480)
 	.buildAndRegister();
 
 
