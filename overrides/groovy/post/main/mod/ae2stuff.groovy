@@ -86,7 +86,7 @@ crafting.shapedBuilder()
     .key('S', item('appliedenergistics2:material', 36))
     .register()
 
-// Misc changes
+// Misc recipechanges
 for (String type : ['ae2stuff:wireless', 'ae2stuff:wireless_hub']) {
     // Init chisel group
     mods.chisel.carving.addGroup(type)

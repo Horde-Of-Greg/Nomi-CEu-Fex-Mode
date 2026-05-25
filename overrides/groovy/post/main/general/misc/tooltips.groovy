@@ -24,7 +24,7 @@ import mustapelto.deepmoblearning.common.metadata.MetadataLivingMatter
 import mustapelto.deepmoblearning.common.metadata.MetadataManager
 import net.minecraft.item.ItemStack
 
-// This file specifies most custom tooltip changes.
+// This file specifies most custom tooltip recipechanges.
 // Exceptions: Fluid Tooltips, NBT Clearing Tooltips, Deprecation Tooltips, and Tooltips for Addons
 
 /* Mixed */

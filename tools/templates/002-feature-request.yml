@@ -4,7 +4,7 @@ labels: enhancement
 body:
   - type: markdown
     attributes:
-      value: "Note: balancing ideas should use this template, but only for changes. However, if its a problem, not a change, like `X material always runs out`, please use the `Bug Report` Template."
+      value: "Note: balancing ideas should use this template, but only for recipechanges. However, if its a problem, not a change, like `X material always runs out`, please use the `Bug Report` Template."
   - type: dropdown
     id: version
     attributes:
