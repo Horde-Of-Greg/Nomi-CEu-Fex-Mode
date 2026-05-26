@@ -169,28 +169,29 @@ recipes.addShaped(<meta_tile_entity:hull.ulv>, [
 	[<ore:cableGtSingleLead>, <gregtech:machine_casing>, <ore:cableGtSingleLead>]]);	
 */
 
-// pyro
+// pyro both recipes here changed from 20s at lv (i think) -> 180s at mv, steam 4b -> 16b
 
 //Phenol and Coke
 pyrolyse_oven.recipeBuilder()
 	.inputs([<minecraft:coal> * 16])
 	.circuit(14)
-	.fluidInputs([<liquid:steam> * 4000])
+	.fluidInputs([<liquid:steam> * 16000])
 	.outputs([<metaitem:gemCoke> * 20])
 	.fluidOutputs([<liquid:phenol> * 1000])
-	.duration(600).EUt(30).buildAndRegister();
+	.duration(3600).EUt(120).buildAndRegister();
 
 //Phenol and Coke dust
 pyrolyse_oven.recipeBuilder()
 	.inputs([<metaitem:dustCoal> * 16])
 	.circuit(11)
-	.fluidInputs([<liquid:steam> * 4000])
+	.fluidInputs([<liquid:steam> * 16000])
 	.outputs([<metaitem:dustCoke> * 20])
 	.fluidOutputs([<liquid:phenol> * 1000])
-	.duration(600).EUt(30).buildAndRegister();
+	.duration(3600).EUt(120).buildAndRegister();
 
 // force phenol for phenolic circuit board
-chemical_reactor.recipeBuilder().inputs(<metaitem:board.coated>).fluidInputs([<liquid:phenol> * 100]).outputs([<metaitem:board.phenolic>]).duration(100).EUt(8).buildAndRegister();
+// changed from 5s -> 10s, 0mb -> 500mb wood vinegar and 100mb -> 200mb phenol
+chemical_reactor.recipeBuilder().inputs(<metaitem:board.coated>).fluidInputs([<liquid:phenol> * 200, <liquid:wood_vinegar> * 500]).outputs([<metaitem:board.phenolic>]).duration(200).EUt(8).buildAndRegister();
 // remove Phenolic Circuit Board * 1
 <recipemap:assembler>.findRecipe(30, [<metaitem:dustWood>, <metaitem:circuit.integrated>.withTag({Configuration: 1})], [<liquid:glue> * 50]).remove();
 
