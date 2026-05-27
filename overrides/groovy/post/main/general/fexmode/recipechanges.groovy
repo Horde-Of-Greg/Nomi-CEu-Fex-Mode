@@ -40,7 +40,11 @@ crafting.shapedBuilder()
     .register()
 
 //cbt cupronickel coil
-mods.gregtech.assembler.removeByInput(30, [metaitem('wireGtDoubleCupronickel') * 8, metaitem('foilBronze') * 8], [fluid('tin_alloy') * 144])
+mods.gregtech.assembler.removeByInput(
+  30,
+  [metaitem('wireGtDoubleCupronickel') * 8, metaitem('foilBronze') * 8],
+  [fluid('tin_alloy') * 144]
+)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('wireGtDoubleCupronickel') * 12, metaitem('foilBronze') * 12, metaitem('wireFineCopper') * 48)
     .fluidInputs(fluid('tin_alloy') * 288)
@@ -50,7 +54,11 @@ mods.gregtech.assembler.recipeBuilder()
 
 //lv energy hatch now requires 250mb of NaK
 crafting.remove('gregtech:energy_hatch.lv')
-mods.gregtech.assembler.removeByInput(30, [metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv')], null)
+mods.gregtech.assembler.removeByInput(
+  30,
+  [metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv')],
+  null
+)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv'))
     .fluidInputs(fluid('sodium_potassium') * 250)
@@ -73,8 +81,3 @@ crafting.shapedBuilder()
     .key('P', metaitem('electric.pump.lv'))
     .key('L', ore('pipeHugeFluidLead'))
     .register()
-
-
-
-
-

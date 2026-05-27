@@ -14,13 +14,15 @@ crafting.remove('gregtech:resistor_wire_fine_carbon')
 
 //remove iron recipes for lv motors
 crafting.remove('gregtech:electric_motor_lv_iron')
-mods.gregtech.assembler.removeByInput(30,
-    [metaitem('cableGtSingleTin') * 2, metaitem('stickIron') * 2, metaitem('stickIronMagnetic'), metaitem('wireGtSingleCopper') * 4], null)
+mods.gregtech.assembler.removeByInput(
+  30,
+  [
+    metaitem('cableGtSingleTin') * 2,
+    metaitem('stickIron') * 2,
+    metaitem('stickIronMagnetic'),
+    metaitem('wireGtSingleCopper') * 4
+  ],
+  null
+)
 
 //remove wrought iron in pbf (wip cuz idk how to do it nicely)
-
-
-
-
-
-
