@@ -1,0 +1,14 @@
+{
+  "packName": "Nomi-CEu",
+  "packId": "nomiceu",
+  "version": "1.0.0",
+  "debug": false,
+  "loaders": {
+    "postInit": [
+      "post/classes",
+      "post/bootstrap",
+      "post/main",
+      "post/addon"
+    ]
+  }
+}

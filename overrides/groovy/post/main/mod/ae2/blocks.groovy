@@ -137,8 +137,8 @@ crafting.shapedBuilder()
     .key('Q', metaitem('quantumstar'))
     .replace().register()
 
-// Interfaces
-var makeInterface = { String recipeName, OreDictIngredient plate, ItemStack moving, ItemStack interfaceStack ->
+// Interfaces, buffed
+var makeInterface = { String recipeName, OreDictIngredient plate, ItemStack moving, ItemStack interfaceStack, ItemStack superChestTank ->
     crafting.remove(recipeName)
     crafting.shapedBuilder()
         .output(interfaceStack)
@@ -149,22 +149,24 @@ var makeInterface = { String recipeName, OreDictIngredient plate, ItemStack movi
         .key('P', plate)
         .key('R', moving)
         .key('A', item('appliedenergistics2:material', 44))
-        .key('M', metaitem('hull.mv'))
+        .key('M', superChestTank)
         .key('F', item('appliedenergistics2:material', 43))
         .register()
 }
 
 // Interface
 makeInterface('appliedenergistics2:network/blocks/interfaces_interface',
-    ore('plateAluminium'),
+    ore('plateDoubleAluminium'),
     metaitem('robot.arm.mv'),
-    item('appliedenergistics2:interface'))
+    item('appliedenergistics2:interface'),
+    metaitem('super_chest.mv'))
 
 // Fluid Interface
 makeInterface('appliedenergistics2:network/blocks/fluid_interfaces_interface',
     ore('plateLapis'),
     metaitem('electric.pump.mv'),
-    item('appliedenergistics2:fluid_interface'))
+    item('appliedenergistics2:fluid_interface'),
+    metaitem('super_tank.mv'))
 
 /* Cables */
 // Quartz Fiber
@@ -321,17 +323,28 @@ makeExportBus(ore('plateAluminium'), item('appliedenergistics2:part', 260))
 // Fluid Export Bus
 makeExportBus(ore('plateLapis'), item('appliedenergistics2:part', 261))
 
-// Storage Bus
-crafting.shapelessBuilder()
-    .output(item('appliedenergistics2:part', 220))
-    .input(metaitem('electric.piston.mv'), item('appliedenergistics2:interface'))
-    .replace().register()
+// Storage Bus, buffed
+var makeStorageBus = { String recipeName, ItemStack busType, ItemStack ifaceType, ItemStack comp ->
+    crafting.remove(recipeName)
+    crafting.shapedBuilder()
+        .output(busType)
+        .matrix(
+            'C  ',
+            'CIV',
+            'C  ')
+        .key('C', comp)
+        .key('I', ifaceType)
+        .key('V', item('appliedenergistics2:view_cell'))
+        .register()
+}
+
+//Storage bus
+makeStorageBus('appliedenergistics2:network/parts/storage_bus', item('appliedenergistics2:part', 220),
+    item('appliedenergistics2:interface'), metaitem('electric.piston.mv'))
 
 // Fluid Storage Bus
-crafting.shapelessBuilder()
-    .output(item('appliedenergistics2:part', 221))
-    .input(metaitem('electric.pump.mv'), item('appliedenergistics2:fluid_interface'))
-    .replace().register()
+makeStorageBus('appliedenergistics2:network/parts/storage_bus_fluid', item('appliedenergistics2:part', 221),
+    item('appliedenergistics2:fluid_interface'), metaitem('electric.pump.mv'))
 
 // Oredict Storage Bus
 crafting.shapelessBuilder()
