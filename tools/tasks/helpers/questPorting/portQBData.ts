@@ -1,16 +1,8 @@
-import { checkbox, input, select } from "@inquirer/prompts";
-import {
-	Changed,
-	Mode,
-	SavedPorter,
-	SourceOption,
-} from "#types/actionQBTypes.ts";
+import { checkbox, input } from "@inquirer/prompts";
+import { Changed, SavedPorter } from "#types/actionQBTypes.ts";
 import {
 	booleanSelect,
-	cfgExpertPath,
-	cfgNormalPath,
-	cfgOverrideExpertPath,
-	cfgOverrideNormalPath,
+	cfgQbPath,
 	readFromPorter,
 	savedQuestPorter,
 } from "../actionQBUtils.ts";
@@ -25,8 +17,6 @@ export default class PortQBData {
 	ref: string;
 
 	// Which qb are we porting from
-	type: Mode;
-	sourceOption: SourceOption;
 	srcPath: string;
 	srcPathToChange: string;
 	outputPaths: string[];
@@ -69,8 +59,6 @@ export default class PortQBData {
 	 */
 	constructor() {
 		this.ref = "main";
-		this.type = "NORMAL";
-		this.sourceOption = "CFG";
 		this.srcPath = "";
 		this.srcPathToChange = "";
 		this.outputPaths = [];
@@ -142,51 +130,7 @@ export default class PortQBData {
 			});
 		}
 
-		this.type = await select({
-			message: "How should we port?",
-			choices: [
-				{
-					name: "Normal to Expert",
-					value: "NORMAL",
-				},
-				{
-					name: "Expert to Normal",
-					value: "EXPERT",
-				},
-			],
-		});
-
-		this.sourceOption = await select({
-			message:
-				"Which version should we use, for both Source Files? (We need to check both Normal and Expert to Port!)",
-			choices: [
-				{
-					name: "Main Config Dir",
-					value: "CFG" as SourceOption,
-				},
-				{
-					name: "Config Overrides",
-					value: "CFG-OVERRIDE" as SourceOption,
-				},
-			],
-		});
-
-		switch (this.type) {
-			case "NORMAL":
-				this.srcPath =
-					this.sourceOption === "CFG" ? cfgNormalPath : cfgOverrideNormalPath;
-				this.srcPathToChange =
-					this.sourceOption === "CFG" ? cfgExpertPath : cfgOverrideExpertPath;
-				this.outputPaths = [cfgExpertPath, cfgOverrideExpertPath];
-				break;
-			case "EXPERT":
-				this.srcPath =
-					this.sourceOption === "CFG" ? cfgExpertPath : cfgOverrideExpertPath;
-				this.srcPathToChange =
-					this.sourceOption === "CFG" ? cfgNormalPath : cfgOverrideNormalPath;
-				this.outputPaths = [cfgNormalPath, cfgOverrideNormalPath];
-				break;
-		}
+		this.srcPath = cfgQbPath;
 
 		// If We Expand This to include a lot of Boolean Options, we can use https://github.com/Bartheleway/inquirer-table-multiple
 		if (

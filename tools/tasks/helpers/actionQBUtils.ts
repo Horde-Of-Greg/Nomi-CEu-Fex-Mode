@@ -12,12 +12,7 @@ import { join } from "upath";
 import fs from "fs";
 import PortQBData from "./questPorting/portQBData.ts";
 import { input, select } from "@inquirer/prompts";
-import {
-	configFolder,
-	configOverridesFolder,
-	rootDirectory,
-	storageFolder,
-} from "#globals";
+import { configFolder, rootDirectory, storageFolder } from "#globals";
 import logInfo, { logError, logWarn } from "#utils/log.ts";
 import colors from "colors";
 import { getUniqueToArray } from "#utils/util.ts";
@@ -72,36 +67,15 @@ export const emptyQuest: Quest = {
 	},
 };
 
-export const defaultPorter = {
+export const defaultPorter: SavedPorter = {
 	savedQuestMap: [],
-	ignoreQuestsNormal: [],
-	ignoreQuestsExpert: [],
-	alwaysAskQuestsNormal: [],
-	alwaysAskQuestsExpert: [],
-} as SavedPorter;
+	ignoreQuests: [],
+	alwaysAskQuests: [],
+};
 
 /* Paths */
-export const cfgNormalPath = join(
+export const cfgQbPath = join(
 	configFolder,
-	"betterquesting",
-	"DefaultQuests.json",
-);
-export const cfgExpertPath = join(
-	configFolder,
-	"betterquesting",
-	"saved_quests",
-	"ExpertQuests.json",
-);
-
-export const cfgOverrideNormalPath = join(
-	configOverridesFolder,
-	"normal",
-	"betterquesting",
-	"DefaultQuests.json",
-);
-export const cfgOverrideExpertPath = join(
-	configOverridesFolder,
-	"expert",
 	"betterquesting",
 	"DefaultQuests.json",
 );
@@ -611,40 +585,24 @@ async function savePorter() {
 
 	// Save Map
 	porter.savedQuestMap = [];
-	for (const sourceID of data.foundQuests.keys()) {
-		const sourceQuest = data.foundQuests.get(sourceID);
+	for (const ID of data.foundQuests.keys()) {
+		const sourceQuest = data.foundQuests.get(ID);
 		if (!sourceQuest) continue;
-		const targetID = id(sourceQuest);
-
-		let normalID: number, expertID: number;
-		switch (data.type) {
-			case "NORMAL":
-				normalID = sourceID;
-				expertID = targetID;
-				break;
-			case "EXPERT":
-				normalID = targetID;
-				expertID = sourceID;
-				break;
-		}
 
 		porter.savedQuestMap.push({
-			normal: normalID,
-			expert: expertID,
+			id: ID,
 		});
 
-		porter.savedQuestMap.sort((a, b) => a.normal - b.normal);
+		porter.savedQuestMap.sort((a, b) => a.id - b.id);
 	}
 
 	// Save Ignore
 	const ignoreArr = [...data.ignoreQuests];
-	if (data.type === "NORMAL") porter.ignoreQuestsNormal = ignoreArr;
-	else porter.ignoreQuestsExpert = ignoreArr;
+	porter.ignoreQuests = ignoreArr;
 
 	// Save Always Ask
 	const alwaysAskArr = [...data.alwaysAskQuests];
-	if (data.type === "NORMAL") porter.alwaysAskQuestsNormal = alwaysAskArr;
-	else porter.alwaysAskQuestsExpert = alwaysAskArr;
+	porter.alwaysAskQuests = alwaysAskArr;
 
 	// Write Porter to File
 	return fs.promises.writeFile(
@@ -669,46 +627,26 @@ export async function readFromPorter(
 	// Add in Map
 	if (replaceExisting) data.foundQuests.clear();
 	for (const savedQuestPath of savedPorter.savedQuestMap) {
-		if (
-			Number.isNaN(savedQuestPath.normal) ||
-			Number.isNaN(savedQuestPath.expert)
-		)
+		if (Number.isNaN(savedQuestPath.id)) {
 			throw new Error("ID must be a number!");
-
-		let sourceID: number, targetID: number;
-		switch (data.type) {
-			case "NORMAL":
-				sourceID = savedQuestPath.normal;
-				targetID = savedQuestPath.expert;
-				break;
-			case "EXPERT":
-				sourceID = savedQuestPath.expert;
-				targetID = savedQuestPath.normal;
-				break;
 		}
 
-		if (!data.currentIDsToQuests.has(sourceID))
-			throw new Error("ID must be a valid quest!");
-		const targetQuest = data.toChangeIDsToQuests.get(targetID);
-		if (!targetQuest) throw new Error("ID must be a valid quest!");
+		const ID: number = savedQuestPath.id;
 
-		if (!data.foundQuests.has(sourceID))
-			data.foundQuests.set(sourceID, targetQuest);
+		if (!data.currentIDsToQuests.has(ID)) {
+			throw new Error("ID must be a valid quest!");
+		}
 	}
 
 	// Ignore & Always Ask
 	data.ignoreQuests = addToOrReplaceSet(
 		replaceExisting,
-		data.type === "NORMAL"
-			? savedPorter.ignoreQuestsNormal
-			: savedPorter.ignoreQuestsExpert,
+		savedPorter.ignoreQuests,
 		data.ignoreQuests,
 	);
 	data.alwaysAskQuests = addToOrReplaceSet(
 		replaceExisting,
-		data.type === "NORMAL"
-			? savedPorter.alwaysAskQuestsNormal
-			: savedPorter.alwaysAskQuestsExpert,
+		savedPorter.alwaysAskQuests,
 		data.alwaysAskQuests,
 	);
 

@@ -70,11 +70,7 @@ export async function additions(): Promise<void> {
 			} else deps[i] = id(depQuest);
 		}
 
-		// if we are porting TO expert, strip rewards
-		if (data.type === "NORMAL") {
-			logInfo("Stripping Rewards...");
-			stripRewards(quest);
-		}
+		stripRewards(quest);
 
 		// Push to Output
 		data.toChangeIDsToQuests.set(id(quest), quest);

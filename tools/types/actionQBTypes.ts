@@ -2,12 +2,6 @@ import { Quest } from "./bqQuestBook.ts";
 import { Operation } from "just-diff";
 import { Matcher } from "picomatch";
 
-// QB Porting From.
-export type Mode = "NORMAL" | "EXPERT";
-
-// Which File to Source From
-export type SourceOption = "CFG" | "CFG-OVERRIDE";
-
 export type YesIgnoreNo = "YES" | "IGNORE" | "NO";
 
 export type InfoMode = "SAVE_INFO" | "MODIFY";
@@ -78,15 +72,12 @@ export interface BunchedLogic {
 
 export interface SavedPorter {
 	savedQuestMap: SavedQuestPath[];
-	alwaysAskQuestsNormal: number[];
-	alwaysAskQuestsExpert: number[];
-	ignoreQuestsNormal: number[];
-	ignoreQuestsExpert: number[];
+	alwaysAskQuests: number[];
+	ignoreQuests: number[];
 }
 
 export interface SavedQuestPath {
-	normal: number;
-	expert: number;
+	id: number;
 }
 
 export interface BunchedParserPath {

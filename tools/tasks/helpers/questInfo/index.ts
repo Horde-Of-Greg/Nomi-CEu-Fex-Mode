@@ -1,12 +1,11 @@
 import { input, select } from "@inquirer/prompts";
-import { InfoAction, InfoMode, Mode } from "#types/actionQBTypes.ts";
+import { InfoAction, InfoMode } from "#types/actionQBTypes.ts";
 import fs from "fs";
 import { join } from "upath";
 import { rootDirectory } from "#globals";
 import {
 	booleanSelect,
-	cfgExpertPath,
-	cfgNormalPath,
+	cfgQbPath,
 	id,
 	name,
 	stringifyQB,
@@ -21,26 +20,10 @@ export default async function questInfo(): Promise<void> {
 	const questsString = await input({
 		message: "Quest IDs:",
 	});
-	const mode: Mode = await select({
-		message: "Which Quest Book?",
-		choices: [
-			{
-				name: "Normal Mode",
-				value: "NORMAL",
-			},
-			{
-				name: "Expert Mode",
-				value: "EXPERT",
-			},
-		],
-	});
 
 	const quests = questsString.split(",").map((s) => Number.parseInt(s.trim()));
 	const qb = JSON.parse(
-		await fs.promises.readFile(
-			join(rootDirectory, mode == "EXPERT" ? cfgExpertPath : cfgNormalPath),
-			"utf-8",
-		),
+		await fs.promises.readFile(join(rootDirectory, cfgQbPath), "utf-8"),
 	) as QuestBook;
 	const questMap = new Map<number, Quest>(
 		Object.keys(qb["questDatabase:9"])
@@ -121,10 +104,7 @@ export default async function questInfo(): Promise<void> {
 
 		const parsed = stringifyQB(qb);
 
-		return fs.promises.writeFile(
-			join(rootDirectory, mode == "EXPERT" ? cfgExpertPath : cfgNormalPath),
-			parsed,
-		);
+		return fs.promises.writeFile(join(rootDirectory, cfgQbPath), parsed);
 	}
 
 	logInfo("Saving to qbInfo.txt...");

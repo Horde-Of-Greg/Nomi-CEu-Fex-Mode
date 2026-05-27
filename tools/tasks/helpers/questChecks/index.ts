@@ -1,10 +1,7 @@
 import { QuestBook } from "#types/bqQuestBook.ts";
 import fs from "fs";
 import {
-	cfgExpertPath,
-	cfgNormalPath,
-	cfgOverrideExpertPath,
-	cfgOverrideNormalPath,
+	cfgQbPath,
 	emptyQuest,
 	id,
 	isEmptyQuest,
@@ -13,7 +10,6 @@ import {
 	stripRewards,
 } from "#tasks/helpers/actionQBUtils.ts";
 import { input, select } from "@inquirer/prompts";
-import { SourceOption } from "#types/actionQBTypes.ts";
 import logInfo, { logError, logWarn } from "#utils/log.ts";
 import { join } from "upath";
 import { rootDirectory } from "#globals";
@@ -47,96 +43,22 @@ export const fix = () => checkAndFix(false);
 
 async function checkAndFix(shouldCheck: boolean) {
 	logInfo(colors.bold(`${shouldCheck ? "Checking" : "Fixing"} QB...`));
-	let checkNormalQB: QuestBook;
-	let checkExpertQB: QuestBook;
 
-	if (shouldCheck) {
-		const nml1 = await fs.promises.readFile(
-			join(rootDirectory, cfgNormalPath),
-			"utf-8",
-		);
-		const nml2 = await fs.promises.readFile(
-			join(rootDirectory, cfgOverrideNormalPath),
-			"utf-8",
-		);
-		if (nml1 !== nml2) throw new Error("Normal Quest Books are not the Same!");
+	const qbFile = await fs.promises.readFile(
+		join(rootDirectory, cfgQbPath),
+		"utf-8",
+	);
 
-		const exp1 = await fs.promises.readFile(
-			join(rootDirectory, cfgExpertPath),
-			"utf-8",
-		);
-		const exp2 = await fs.promises.readFile(
-			join(rootDirectory, cfgOverrideExpertPath),
-			"utf-8",
-		);
-		if (exp1 !== exp2) throw new Error("Expert Quest Books are not the Same!");
+	const checkQB = JSON.parse(qbFile) as QuestBook;
 
-		checkNormalQB = JSON.parse(nml1) as QuestBook;
-		checkExpertQB = JSON.parse(exp1) as QuestBook;
-	} else {
-		const normalSrc = await select({
-			message: "Which version should we use, for the Normal Source File?",
-			choices: [
-				{
-					name: "Main Config Dir",
-					value: "CFG" as SourceOption,
-				},
-				{
-					name: "Config Overrides",
-					value: "CFG-OVERRIDE" as SourceOption,
-				},
-			],
-		});
-
-		const expertSrc = await select({
-			message: "Which version should we use, for the Expert Source File?",
-			choices: [
-				{
-					name: "Main Config Dir",
-					value: "CFG" as SourceOption,
-				},
-				{
-					name: "Config Overrides",
-					value: "CFG-OVERRIDE" as SourceOption,
-				},
-			],
-		});
-
-		checkNormalQB = JSON.parse(
-			await fs.promises.readFile(
-				join(
-					rootDirectory,
-					normalSrc === "CFG" ? cfgNormalPath : cfgOverrideNormalPath,
-				),
-				"utf-8",
-			),
-		) as QuestBook;
-
-		checkExpertQB = JSON.parse(
-			await fs.promises.readFile(
-				join(
-					rootDirectory,
-					expertSrc === "CFG" ? cfgExpertPath : cfgOverrideExpertPath,
-				),
-				"utf-8",
-			),
-		) as QuestBook;
-	}
-
-	logInfo(colors.bold("Processing Normal QB..."));
-	await checkAndFixQB(shouldCheck, checkNormalQB, false);
-	logInfo(colors.bold("Processing Expert QB..."));
-	await checkAndFixQB(shouldCheck, checkExpertQB, true);
+	logInfo(colors.bold("Processing QB..."));
+	await checkAndFixQB(shouldCheck, checkQB, false);
 
 	if (!shouldCheck) {
 		logInfo("Saving...");
-		const normal = stringifyQB(checkNormalQB);
-		const expert = stringifyQB(checkExpertQB);
+		const qb = stringifyQB(checkQB);
 		await Promise.all([
-			fs.promises.writeFile(join(rootDirectory, cfgNormalPath), normal),
-			fs.promises.writeFile(join(rootDirectory, cfgOverrideNormalPath), normal),
-			fs.promises.writeFile(join(rootDirectory, cfgExpertPath), expert),
-			fs.promises.writeFile(join(rootDirectory, cfgOverrideExpertPath), expert),
+			fs.promises.writeFile(join(rootDirectory, cfgQbPath), qb),
 		]);
 	} else logInfo(colors.green("Successful. No Formatting Errors!"));
 }
