@@ -1,11 +1,6 @@
 import fs from "fs";
 import { join } from "upath";
-import {
-	overridesFolder,
-	configFolder,
-	configOverridesFolder,
-	sharedDestDirectory,
-} from "#globals";
+import { overridesFolder, configFolder, sharedDestDirectory } from "#globals";
 import {
 	Quest,
 	QuestBook,
@@ -17,7 +12,6 @@ const sharedQBDefaults = join(
 	configFolder,
 	"betterquesting",
 );
-const sharedConfigOverrides = join(sharedDestDirectory, configOverridesFolder);
 
 const langFileLocation = "resources/questbook/lang";
 
@@ -117,41 +111,15 @@ function stripUselessMetadata(object: Record<string, unknown>) {
  */
 export async function transformQuestBook(): Promise<void> {
 	// Source Quest Book File Locations
-	const questPathNormalSource = join(sharedQBDefaults, "DefaultQuests.json");
-	const questPathExpertSource = join(
-		sharedQBDefaults,
-		"saved_quests",
-		"ExpertQuests.json",
-	);
+	const questPathSource = join(sharedQBDefaults, "DefaultQuests.json");
 
 	// Quest Book Objects
-	const questBookNormal: QuestBook = JSON.parse(
-		await fs.promises.readFile(questPathNormalSource, "utf-8"),
-	) as QuestBook;
-	const questBookExpert: QuestBook = JSON.parse(
-		await fs.promises.readFile(questPathExpertSource, "utf-8"),
+	const questBook: QuestBook = JSON.parse(
+		await fs.promises.readFile(questPathSource, "utf-8"),
 	) as QuestBook;
 
 	// Quest Book Paths
-	const questPathNormalDefault = join(sharedQBDefaults, "DefaultQuests.json");
-	const questPathNormalOverride = join(
-		sharedConfigOverrides,
-		"normal",
-		"betterquesting",
-		"DefaultQuests.json",
-	);
-
-	const questPathExpertDefault = join(
-		sharedQBDefaults,
-		"saved_quests",
-		"ExpertQuests.json",
-	);
-	const questPathExpertOverride = join(
-		sharedConfigOverrides,
-		"expert",
-		"betterquesting",
-		"DefaultQuests.json",
-	);
+	const questPath = join(sharedQBDefaults, "DefaultQuests.json");
 
 	// Quest Lang Location
 	const questLangLocation = join(
@@ -174,40 +142,14 @@ export async function transformQuestBook(): Promise<void> {
 	const questID = (item: Quest) => item["questID:3"];
 	const lineID = (item: QuestLine) => item["lineID:3"];
 
-	lines.push("# Normal Quest Lang Entries:", "");
-
-	// Normal Mode Quest lines.
-	transformKeyPairs(
-		questBookNormal["questLines:9"],
-		"normal",
-		"line",
-		lines,
-		lineID,
-	);
-
-	// Normal Mode Quests themselves.
-	transformKeyPairs(
-		questBookNormal["questDatabase:9"],
-		"normal",
-		"db",
-		lines,
-		questID,
-	);
-
-	lines.push("# Expert Quest Lang Entries:", "");
+	lines.push("# Quest Lang Entries:", "");
 
 	// Expert Mode Quest lines.
-	transformKeyPairs(
-		questBookExpert["questLines:9"],
-		"expert",
-		"line",
-		lines,
-		lineID,
-	);
+	transformKeyPairs(questBook["questLines:9"], "expert", "line", lines, lineID);
 
 	// Expert Mode Quests themselves.
 	transformKeyPairs(
-		questBookExpert["questDatabase:9"],
+		questBook["questDatabase:9"],
 		"expert",
 		"db",
 		lines,
@@ -222,25 +164,8 @@ export async function transformQuestBook(): Promise<void> {
 	);
 
 	// Strip useless metadata.
-	stripUselessMetadata(questBookNormal as unknown as Record<string, unknown>);
-	stripUselessMetadata(questBookExpert as unknown as Record<string, unknown>);
+	stripUselessMetadata(questBook as unknown as Record<string, unknown>);
 
 	// Write QB files.
-	await fs.promises.writeFile(
-		questPathNormalDefault,
-		JSON.stringify(questBookNormal, null, 2),
-	);
-	await fs.promises.writeFile(
-		questPathNormalOverride,
-		JSON.stringify(questBookNormal, null, 2),
-	);
-
-	await fs.promises.writeFile(
-		questPathExpertDefault,
-		JSON.stringify(questBookExpert, null, 2),
-	);
-	return await fs.promises.writeFile(
-		questPathExpertOverride,
-		JSON.stringify(questBookExpert, null, 2),
-	);
+	await fs.promises.writeFile(questPath, JSON.stringify(questBook, null, 2));
 }
