@@ -25,4 +25,8 @@ mods.gregtech.assembler.removeByInput(
   null
 )
 
-//remove wrought iron in pbf (wip cuz idk how to do it nicely)
+//remove op combustion fuels
+mods.gregtech.combustion_generator.removeByInput(32, null, [fluid('naphtha')])
+mods.gregtech.combustion_generator.removeByInput(32, null, [fluid('light_fuel')])
+
+
