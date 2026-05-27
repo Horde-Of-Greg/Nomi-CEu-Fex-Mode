@@ -112,17 +112,17 @@ recipes.remove(<appliedenergistics2:quartz_glass>);
 recipes.addShaped(<simplyjetpacks:metaitem:4>, [[<minecraft:leather>, <ore:plateSteel>, <minecraft:leather>]]);
 
 //EIO Alloys
-// Dark steel
-alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <minecraft:obsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <minecraft:obsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <metaitem:dustObsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <metaitem:dustObsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <actuallyadditions:item_crystal:3>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <actuallyadditions:item_crystal:3>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(240).EUt(16).buildAndRegister();
+// Dark steel 12s -> 28s
+alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <minecraft:obsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <minecraft:obsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <metaitem:dustObsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <metaitem:dustObsidian>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <actuallyadditions:item_crystal:3>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <actuallyadditions:item_crystal:3>]).outputs([<metaitem:nomilabs:ingotDarkSteel>]).duration(560).EUt(16).buildAndRegister();
 
-// Electrical Steel
-alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <metaitem:dustSilicon>]).outputs([<metaitem:nomilabs:ingotElectricalSteel>]).duration(120).EUt(16).buildAndRegister();
-alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <metaitem:dustSilicon>]).outputs([<metaitem:nomilabs:ingotElectricalSteel>]).duration(120).EUt(16).buildAndRegister();
+// Electrical Steel 6s -> 20s
+alloy_smelter.recipeBuilder().inputs([<metaitem:ingotSteel>, <metaitem:dustSilicon>]).outputs([<metaitem:nomilabs:ingotElectricalSteel>]).duration(400).EUt(16).buildAndRegister();
+alloy_smelter.recipeBuilder().inputs([<metaitem:dustSteel>, <metaitem:dustSilicon>]).outputs([<metaitem:nomilabs:ingotElectricalSteel>]).duration(400).EUt(16).buildAndRegister();
 
 // End Steel
 alloy_smelter.recipeBuilder().inputs([<metaitem:nomilabs:ingotDarkSteel>, <ore:dustEndstone>]).outputs([<metaitem:nomilabs:ingotEndSteel>]).duration(300).EUt(120).buildAndRegister();

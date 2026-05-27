@@ -40,17 +40,14 @@ crafting.shapelessBuilder()
     .replace().register()
 
 /* Materials */
-// Pattern
-crafting.shapedBuilder()
-    .output(item('appliedenergistics2:material', 52) * 8)
-    .matrix(
-        'WWW',
-        'PCP',
-        'PPP')
-    .key('W', metaitem('wireFineSilver'))
-    .key('P', metaitem('platePlastic'))
-    .key('C', ore('circuitHv'))
-    .replace().register()
+// Pattern, buffed and moved to assembler
+crafting.removeByOutput(item('appliedenergistics2:material:52') * 8)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(ore('circuitHv'), metaitem('plateSilver') * 4, ore('wireFineBorosilicateGlass') * 8)
+    .fluidInputs(fluid('plastic') * 1152)
+    .outputs(item('appliedenergistics2:material', 52) * 4)
+    .duration(240).EUt(64)
+    .buildAndRegister()
 
 // Fluix Plate
 mods.gregtech.compressor.recipeBuilder()
