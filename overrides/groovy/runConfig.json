@@ -9,6 +9,9 @@
       "post/bootstrap",
       "post/main",
       "post/addon"
-    ]
+    ],
+    "preInit": [
+      "pre/addings"
+        ]
   }
 }

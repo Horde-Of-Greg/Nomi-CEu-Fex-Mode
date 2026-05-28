@@ -43,32 +43,31 @@ crafting.shapedBuilder()
     .key('H', metaitem('hull.lv'))
     .replace().register()
 
-// ME Chest
+// ME Chest, buffed
 crafting.shapedBuilder()
     .output(item('appliedenergistics2:chest'))
     .matrix(
         'GPG',
-        'CSF',
-        'DQD')
+        'CSC',
+        'DYD')
     .key('G', item('appliedenergistics2:quartz_glass'))
     .key('P', item('appliedenergistics2:part', 180))
-    .key('C', item('appliedenergistics2:material', 10))
+    .key('C', item('appliedenergistics2:material', 23))
     .key('S', item('actuallyadditions:block_giant_chest'))
-    .key('F', item('appliedenergistics2:material', 12))
     .key('D', ore('blockDarkSteel'))
-    .key('Q', item('appliedenergistics2:material', 11))
+    .key('Y', item('appliedenergistics2:spatial_pylon'))
     .replace().register()
 
-// ME Drive
+// ME Drive, buffed
 crafting.shapedBuilder()
     .output(item('appliedenergistics2:drive'))
     .matrix(
-        'PEP',
+        'EEE',
         'LCL',
-        'PSP')
-    .key('P', metaitem('plateAluminium'))
+        'SHS')
+    .key('H', metaitem('hull.mv'))
     .key('E', metaitem('emitter.mv'))
-    .key('L', ore('circuitLv'))
+    .key('L', ore('circuitMv'))
     .key('C', item('appliedenergistics2:chest'))
     .key('S', metaitem('sensor.mv'))
     .replace().register()
@@ -138,7 +137,11 @@ crafting.shapedBuilder()
     .replace().register()
 
 // Interfaces, buffed
-var makeInterface = { String recipeName, OreDictIngredient plate, ItemStack moving, ItemStack interfaceStack, ItemStack superChestTank ->
+var makeInterface = { String recipeName,
+                      OreDictIngredient plate,
+                      ItemStack moving,
+                      ItemStack interfaceStack,
+                      ItemStack superChestTank ->
     crafting.remove(recipeName)
     crafting.shapedBuilder()
         .output(interfaceStack)
@@ -353,15 +356,15 @@ crafting.shapelessBuilder()
     .replace().register()
 
 /* Misc Block Parts */
-// P2P Tunnel
+// P2P Tunnel engineering processor -> 2³ spatial component
 crafting.shapedBuilder()
     .output(item('appliedenergistics2:part', 460))
     .matrix(
         ' P ',
-        'PEP',
+        'PSP',
         'FFF')
     .key('P', metaitem('plateStainlessSteel'))
-    .key('E', item('appliedenergistics2:material', 24))
+    .key('S', item('appliedenergistics2:material', 32))
     .key('F', ore('plateFluix'))
     .replace().register()
 

@@ -74,19 +74,19 @@ recipes.addShaped(<actuallyadditions:block_empowerer>, [
 [<actuallyadditions:block_crystal:5>,<actuallyadditions:block_display_stand>,<actuallyadditions:block_crystal:5>], 
 [<metaitem:plateTungstenCarbide>,<actuallyadditions:block_crystal:5>,<metaitem:plateTungstenCarbide>]]);
 
-//Basic Coil
-recipes.remove(<actuallyadditions:item_misc:7>);	
+//Basic Coil, conductive iron -> silver
+recipes.remove(<actuallyadditions:item_misc:7>);
 recipes.addShaped(<actuallyadditions:item_misc:7>, [
-[null,<ore:wireGtSingleConductiveIron>,<actuallyadditions:item_crystal>], 
-[<ore:wireGtSingleConductiveIron>,<actuallyadditions:item_crystal>,<ore:wireGtSingleConductiveIron>], 
-[<actuallyadditions:item_crystal>,<ore:wireGtSingleConductiveIron>,null]]);
+[null,<ore:wireGtSingleSilver>,<actuallyadditions:item_crystal>],
+[<ore:wireGtSingleSilver>,<actuallyadditions:item_crystal>,<ore:wireGtSingleSilver>],
+[<actuallyadditions:item_crystal>,<ore:wireGtSingleSilver>,null]]);
 
-//Advanced Coil
-recipes.remove(<actuallyadditions:item_misc:8>);	
+//Advanced Coil, energetic alloy -> gold
+recipes.remove(<actuallyadditions:item_misc:8>);
 recipes.addShaped(<actuallyadditions:item_misc:8>, [
-[<ore:wireGtSingleEnergeticAlloy>,<ore:wireGtSingleEnergeticAlloy>,<ore:wireGtSingleEnergeticAlloy>], 
-[<ore:wireGtSingleEnergeticAlloy>,<actuallyadditions:item_misc:7>,<ore:wireGtSingleEnergeticAlloy>], 
-[<ore:wireGtSingleEnergeticAlloy>,<ore:wireGtSingleEnergeticAlloy>,<ore:wireGtSingleEnergeticAlloy>]]);
+[<ore:wireGtSingleGold>,<ore:wireGtSingleGold>,<ore:wireGtSingleGold>],
+[<ore:wireGtSingleGold>,<actuallyadditions:item_misc:7>,<ore:wireGtSingleGold>],
+[<ore:wireGtSingleGold>,<ore:wireGtSingleGold>,<ore:wireGtSingleGold>]]);
 
 //XU2 Machine Block
 recipes.removeByRecipeName("extrautils2:machine_base");

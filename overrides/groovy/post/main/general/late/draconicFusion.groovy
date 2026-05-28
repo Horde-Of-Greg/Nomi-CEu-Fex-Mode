@@ -33,18 +33,18 @@ mods.draconicevolution.fusion.recipeBuilder()
     .energy(3_250_000_000).tierChaotic()
     .register()
 
-// Neutronium Solar Panel
+// Neutronium Solar Panel changed MAX nomilabs supercon to DE draconic wireless crystal
 mods.draconicevolution.fusion.recipeBuilder()
     .catalyst(item('solarflux:solar_panel_chaotic'))
     .input(
         item('draconicevolution:chaotic_core'),
         item('draconicevolution:chaotic_core'),
-        metaitem('nomilabs:wireGtSingleDraconicSuperconductor'),
-        metaitem('nomilabs:wireGtSingleDraconicSuperconductor'),
+        item('draconicevolution:energy_crystal:8'),
+        item('draconicevolution:energy_crystal:8'),
         item('extendedcrafting:storage', 4),
         item('extendedcrafting:storage', 4),
-        metaitem('nomilabs:wireGtSingleDraconicSuperconductor'),
-        metaitem('nomilabs:wireGtSingleDraconicSuperconductor'),
+        item('draconicevolution:energy_crystal:8'),
+        item('draconicevolution:energy_crystal:8'),
         item('draconicevolution:chaotic_core'),
         item('draconicevolution:chaotic_core'))
     .output(item('solarflux:solar_panel_neutronium'))

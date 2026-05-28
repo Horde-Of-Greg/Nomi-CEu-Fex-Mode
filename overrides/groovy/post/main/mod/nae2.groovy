@@ -31,7 +31,7 @@ mods.gregtech.assembler.recipeBuilder()
     .outputs(item('nae2:material', 1))
     .duration(200).EUt(VA[IV])
     .buildAndRegister()
-
+//changed all instances of endsteel wire with niobium nitride wire
 // 1024k Storage
 mods.gregtech.assembly_line.recipeBuilder()
     .inputs(
@@ -44,7 +44,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.mv'),
         ore('wireFineGold') * 16,
-        ore('wireGtSingleEndSteel') * 4)
+        ore('wireGtSingleNiobiumNitride') * 4)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .outputs(item('nae2:material', 2))
     .scannerResearch(b -> b.researchStack(item('nae2:material', 1)))
@@ -63,7 +63,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.hv'),
         ore('wireFineGold') * 32,
-        ore('wireGtSingleEndSteel') * 8)
+        ore('wireGtSingleNiobiumNitride') * 8)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .outputs(item('nae2:material', 3))
     .stationResearch(b -> b.researchStack(item('nae2:material', 2)).CWUt(16))
@@ -82,7 +82,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.ev'),
         ore('wireFineGold') * 64,
-        ore('wireGtSingleEndSteel') * 16)
+        ore('wireGtSingleNiobiumNitride') * 16)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .outputs(item('nae2:material', 4))
     .stationResearch(b -> b.researchStack(item('nae2:material', 3)).CWUt(48))
@@ -117,7 +117,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.mv'),
         ore('wireFineGold') * 16,
-        ore('wireGtSingleEndSteel') * 4)
+        ore('wireGtSingleNiobiumNitride') * 4)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .scannerResearch(b -> b.researchStack(item('nae2:material', 5)))
     .duration(400).EUt(VA[LuV])
@@ -136,7 +136,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.hv'),
         ore('wireFineGold') * 32,
-        ore('wireGtSingleEndSteel') * 8)
+        ore('wireGtSingleNiobiumNitride') * 8)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .stationResearch(b -> b.researchStack(item('nae2:material', 6)).CWUt(16))
     .duration(800).EUt(VA[ZPM])
@@ -155,7 +155,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         ore('gemExquisiteCertusQuartz'),
         metaitem('field.generator.ev'),
         ore('wireFineGold') * 64,
-        ore('wireGtSingleEndSteel') * 16)
+        ore('wireGtSingleNiobiumNitride') * 16)
     .fluidInputs(fluid('soldering_alloy') * 576)
     .stationResearch(b -> b.researchStack(item('nae2:material', 7)).CWUt(48))
     .duration(1600).EUt(VA[UV])

@@ -31,60 +31,61 @@ recipes.remove(<enderio:item_endergy_conduit:6>);
 recipes.remove(<enderio:item_endergy_conduit>);
 recipes.remove(<enderio:item_endergy_conduit:4>);
 
+//changed all energy conduits to require gt supercons
 recipes.addShaped(<enderio:item_power_conduit> * 3, [									//Conductive Iron Conduit
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-	[<metaitem:nomilabs:wireGtSingleConductiveIron>,<metaitem:nomilabs:wireGtSingleConductiveIron>,<metaitem:nomilabs:wireGtSingleConductiveIron>],
+	[<metaitem:gregtech:wireGtSingleManganesePhosphide>,<metaitem:gregtech:wireGtSingleManganesePhosphide>,<metaitem:gregtech:wireGtSingleManganesePhosphide>],
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleConductiveIron> * 3, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleManganesePhosphide> * 3, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit> * 4]).duration(80).EUt(16).buildAndRegister();
 
 recipes.addShaped(<enderio:item_power_conduit:1> * 3, [									//Energetic Alloy Conduit
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-	[<metaitem:nomilabs:wireGtSingleEnergeticAlloy>,<enderio:item_power_conduit>,<metaitem:nomilabs:wireGtSingleEnergeticAlloy>], 
+	[<metaitem:gregtech:wireGtSingleMagnesiumDiboride>,<enderio:item_power_conduit>,<metaitem:gregtech:wireGtSingleMagnesiumDiboride>],
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleEnergeticAlloy> * 2, <enderio:item_power_conduit>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit:1> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleMagnesiumDiboride> * 2, <enderio:item_power_conduit>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit:1> * 4]).duration(80).EUt(16).buildAndRegister();
 
 recipes.addShaped(<enderio:item_power_conduit:2> * 3, [									//vibrant alloy conduit
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-	[<metaitem:nomilabs:wireGtSingleVibrantAlloy>,<enderio:item_power_conduit:1>,<metaitem:nomilabs:wireGtSingleVibrantAlloy>], 
+	[<metaitem:gregtech:wireGtSingleMercuryBariumCalciumCuprate>,<enderio:item_power_conduit:1>,<metaitem:gregtech:wireGtSingleMercuryBariumCalciumCuprate>],
 	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleVibrantAlloy> * 2, <enderio:item_power_conduit:1>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit:2> * 4]).duration(80).EUt(16).buildAndRegister();	
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleMercuryBariumCalciumCuprate> * 2, <enderio:item_power_conduit:1>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_power_conduit:2> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //recipes.addShaped(<enderio:item_endergy_conduit:1> * 3, [									//End Steel Conduit
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleEndSteel>,<enderio:item_power_conduit:2>,<metaitem:nomilabs:wireGtSingleEndSteel>], 
+//	[<metaitem:gregtech:wireGtSingleUraniumTriplatinum>,<enderio:item_power_conduit:2>,<metaitem:gregtech:wireGtSingleUraniumTriplatinum>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleEndSteel> * 2, <enderio:item_power_conduit:2>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:1> * 4]).duration(80).EUt(16).buildAndRegister();	
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleUraniumTriplatinum> * 2, <enderio:item_power_conduit:2>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:1> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //recipes.addShaped(<enderio:item_endergy_conduit:6> * 3, [
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleLumium>,<enderio:item_endergy_conduit:1> ,<metaitem:nomilabs:wireGtSingleLumium>], 
+//	[<metaitem:gregtech:wireGtSingleSamariumIronArsenicOxide>,<enderio:item_endergy_conduit:1> ,<metaitem:gregtech:wireGtSingleSamariumIronArsenicOxide>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleLumium> * 2, <enderio:item_endergy_conduit:1> , <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:6> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleSamariumIronArsenicOxide> * 2, <enderio:item_endergy_conduit:1> , <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:6> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //recipes.addShaped(<enderio:item_endergy_conduit:4> * 3, [
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleSignalum>,<enderio:item_endergy_conduit:6>,<metaitem:nomilabs:wireGtSingleSignalum>], 
+//	[<metaitem:gregtech:wireGtSingleIndiumTinBariumTitaniumCuprate>,<enderio:item_endergy_conduit:6>,<metaitem:gregtech:wireGtSingleIndiumTinBariumTitaniumCuprate>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleSignalum> * 2, <enderio:item_endergy_conduit:6>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:4> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleIndiumTinBariumTitaniumCuprate> * 2, <enderio:item_endergy_conduit:6>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:4> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //recipes.addShaped(<enderio:item_endergy_conduit> * 3, [
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleEnderium>,<enderio:item_endergy_conduit:4>,<metaitem:nomilabs:wireGtSingleEnderium>], 
+//	[<metaitem:gregtech:wireGtSingleUraniumRhodiumDinaquadide>,<enderio:item_endergy_conduit:4>,<metaitem:gregtech:wireGtSingleUraniumRhodiumDinaquadide>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleEnderium>* 2, <enderio:item_endergy_conduit:4>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleUraniumRhodiumDinaquadide>* 2, <enderio:item_endergy_conduit:4>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //recipes.addShaped(<enderio:item_endergy_conduit:10> * 3, [
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleDraconium>,<enderio:item_endergy_conduit>,<metaitem:nomilabs:wireGtSingleDraconium>], 
+//	[<metaitem:nomilabs:gregtech:wireGtSingleEnrichedNaquadahTriniumEuropiumDuranide>,<enderio:item_endergy_conduit>,<metaitem:gregtech:wireGtSingleEnrichedNaquadahTriniumEuropiumDuranide>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleDraconium>* 2, <enderio:item_endergy_conduit>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:10> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleEnrichedNaquadahTriniumEuropiumDuranide>* 2, <enderio:item_endergy_conduit>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:10> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //MAX Tier - Superconductor
 //recipes.addShaped(<enderio:item_endergy_conduit:11> * 3, [
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>], 
-//	[<metaitem:nomilabs:wireGtSingleDraconicSuperconductor>,<enderio:item_endergy_conduit:10>,<metaitem:nomilabs:wireGtSingleDraconicSuperconductor>], 
+//	[<metaitem:gregtech:wireGtSingleRutheniumTriniumAmericiumNeutronate>,<enderio:item_endergy_conduit:10>,<metaitem:gregtech:wireGtSingleRutheniumTriniumAmericiumNeutronate>],
 //	[<ore:itemConduitBinder>, <ore:itemConduitBinder>, <ore:itemConduitBinder>]]);
-assembler.recipeBuilder().inputs([<metaitem:nomilabs:wireGtSingleDraconicSuperconductor>* 2, <enderio:item_endergy_conduit:10>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:11> * 4]).duration(80).EUt(16).buildAndRegister();
+assembler.recipeBuilder().inputs([<metaitem:gregtech:wireGtSingleRutheniumTriniumAmericiumNeutronate>* 2, <enderio:item_endergy_conduit:10>, <ore:itemConduitBinder> * 6]).outputs([<enderio:item_endergy_conduit:11> * 4]).duration(80).EUt(16).buildAndRegister();
 
 //redstone conduit - by hand
 recipes.addShaped(<enderio:item_redstone_conduit> * 4, [
