@@ -388,7 +388,7 @@ microverse_projector_2.recipeBuilder()
         <nomilabs:tierfourandhalfship_stabilized_matter>
     ).buildAndRegister();
 
-// t5 ores
+// t5 ores, removed osmiridium and iridosmine
 microverse_projector_2.recipeBuilder()
     .duration(1000)
     .EUt(7500)
@@ -403,8 +403,6 @@ microverse_projector_2.recipeBuilder()
              <gregtech:ore_monazite_0> * 64,
              <gregtech:ore_monazite_0> * 64,
              <gregtech:meta_block_compressed_26> * 64, //Ender Pearl Block
-             <gregtech:ore_osmiridium_8020_0> * 6,
-             <gregtech:ore_iridosmine_8020_0> * 6,
              <metaitem:dustBoron> * 64,
              <gregtech:ore_molybdenite_0> * 64,
              <gregtech:ore_beryllium_0> * 64,
@@ -413,7 +411,7 @@ microverse_projector_2.recipeBuilder()
     .buildAndRegister();
 
 
-// t5 naquadah trinium
+// t5 naquadah trinium, nerfed kaemanite 24 -> 8, nerfed snowchestitite 5 stacks -> 3 stacks
 microverse_projector_2.recipeBuilder()
     .duration(1000)
     .EUt(7500)
@@ -425,9 +423,7 @@ microverse_projector_2.recipeBuilder()
              <gregtech:ore_snowchestite_0> * 64,
              <gregtech:ore_snowchestite_0> * 64,
              <gregtech:ore_snowchestite_0> * 64,
-             <gregtech:ore_snowchestite_0> * 64,
-             <gregtech:ore_snowchestite_0> * 64,
-             <gregtech:ore_kaemanite_0> * 24)
+             <gregtech:ore_kaemanite_0> * 8)
     .buildAndRegister();
 
 
@@ -441,7 +437,7 @@ microverse_projector_2.recipeBuilder()
         <nomilabs:tierfiveship_stabilized_matter>
     ).buildAndRegister();
 
-// t6 u/os/ir
+// t6 u/os/ir, removed iridosmine
 microverse_projector_2.recipeBuilder()
     .duration(1250)
     .EUt(18750)
@@ -454,21 +450,11 @@ microverse_projector_2.recipeBuilder()
              <gregtech:ore_cooperite_0:2> * 64,
              <gregtech:ore_cooperite_0:2> * 64,
              <gregtech:ore_cooperite_0:2> * 64,
-             <gregtech:ore_cooperite_0:2> * 64,
-             <gregtech:ore_iridosmine_8020_0> * 24)
+             <gregtech:ore_cooperite_0:2> * 64)
     .buildAndRegister();
 
 
-// t6 einsteinium
-microverse_projector_2.recipeBuilder()
-    .duration(1250)
-    .EUt(18750)
-    .inputs(<nomilabs:tiersixship>,
-            <nomilabs:quantumflux> * 16,
-            <nomilabs:stabilizedplutonium> * 32,
-            <nomilabs:witherrealmdata> * 64)
-    .outputs(<nomilabs:stabilizedeinsteinium> * 32)
-    .buildAndRegister();
+// t6 einsteinium, removed
 
 // t6 eggs
 microverse_projector_2.recipeBuilder()

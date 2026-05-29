@@ -105,18 +105,116 @@ mods.gregtech.assembler.recipeBuilder()
     .duration(2000).EUt(7680)
     .buildAndRegister()
 
+//voltage coil changes
+//remove all voltage coil recipes lv+
+for (var tier: ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv']){
+    mods.gregtech.assembler.removeByOutput([metaitem("voltage_coil.${tier}")], null)
+}
+
+void addVoltageCoilAss (Collection<ItemStack> output, Collection<IIngredient> input, IIngredient fluid, Integer length, Integer energy) {
+    mods.gregtech.assembler.recipeBuilder()
+        .inputs(input)
+        .circuitMeta(1)
+        .fluidInputs(fluid)
+        .outputs(output)
+        .duration(length).EUt(energy)
+        .buildAndRegister()
+}
+
+//lv coil
+addVoltageCoilAss([metaitem('voltage_coil.lv')],
+    [metaitem('stickIronMagnetic'),
+     metaitem('wireFineSteel') * 32],
+    fluid('lead') * 288, 200, 30)
+//mv coil
+addVoltageCoilAss([metaitem('voltage_coil.mv')],
+    [metaitem('stickSteelMagnetic') * 2,
+     metaitem('wireFineAluminium') * 64],
+    fluid('steel') * 576, 320, 120)
+//hv coil
+addVoltageCoilAss([metaitem('voltage_coil.hv')],
+    [metaitem('stickNeodymiumMagnetic') * 2,
+     metaitem('wireFineStainlessSteel') * 64,
+     metaitem('wireFineStainlessSteel') * 64],
+    fluid('antimony') * 576, 400, 480)
+//ev coil
+addVoltageCoilAss([metaitem('voltage_coil.ev')],
+    [metaitem('stickNeodymiumMagnetic') * 4,
+     metaitem('wireGtSinglePlatinum') * 64,
+     metaitem('boltTitanium') * 64],
+    fluid('tantalum') * 864, 600, 1920)
+//iv coil
+addVoltageCoilAss([metaitem('voltage_coil.iv')],
+    [metaitem('stickLongSamariumMagnetic') * 6,
+     metaitem('wireFineIridium') * 64,
+     metaitem('wireFineIridium') * 64,
+     metaitem('foilIridium') * 64,
+     metaitem('foilIridium') * 64,],
+    fluid('bismuth') * 1728, 1000, 7680)
+
+//luv coil
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('blockSamariumMagnetic'),
+        metaitem('stickLongSamariumMagnetic') * 12,
+        metaitem('ringOsmiridium') * 64,
+        metaitem('gearSmallOsmiridium') * 24,
+        metaitem('plateOsmiridium') * 16)
+    .fluidInputs(fluid('berkelium') * 1296, fluid('liquid_helium') * 4000)
+    .outputs(metaitem('voltage_coil.luv'))
+    .scannerResearch(b -> b.researchStack(metaitem('voltage_coil.iv')))
+    .duration(1800).EUt(30720)
+    .buildAndRegister()
+
+//zpm coil
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(item('nomilabs:magnetron') * 2,
+        metaitem('stickLongSamariumMagnetic') * 24,
+        metaitem('plateDoubleEuropium') * 16,
+        metaitem('foilEuropium') * 64,
+        metaitem('wireGtDoubleEuropium') * 64,
+        metaitem('springEuropium') * 12)
+    .fluidInputs(fluid('californium') * 2592, fluid('liquid_helium') * 16000)
+    .outputs(metaitem('voltage_coil.zpm'))
+    .stationResearch(b -> b.researchStack(metaitem('voltage_coil.luv')).CWUt(8))
+    .duration(3200).EUt(122880)
+    .buildAndRegister()
+
+//uv coil
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(item('nomilabs:magnetron') * 8,
+        metaitem('stickLongSamariumMagnetic') * 64,
+        metaitem('plateDenseTritanium') * 6,
+        metaitem('ringTritanium') * 64,
+        metaitem('gearSmallTritanium') * 48,
+        metaitem('foilTritanium') * 64,
+        metaitem('foilTritanium') * 64,
+        metaitem('wireGtDoubleTritanium') * 64,
+        metaitem('wireGtQuadrupleTritanium') * 24,
+        metaitem('springTritanium') * 16)
+    .fluidInputs(fluid('plasma.argon') * 10368, fluid('liquid_helium') * 80000)
+    .outputs(metaitem('voltage_coil.uv'))
+    .stationResearch(b -> b.researchStack(metaitem('voltage_coil.zpm')).CWUt(64))
+    .duration(5600).EUt(491520)
+    .buildAndRegister()
+
 //lv energy hatch now requires 250mb of NaK
 crafting.remove('gregtech:energy_hatch.lv')
-mods.gregtech.assembler.removeByInput(
-  30,
-  [metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv')],
-  null
-)
+mods.gregtech.assembler.removeByOutput([metaitem('energy_hatch.input.lv')], null)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv'))
     .fluidInputs(fluid('sodium_potassium') * 250)
     .outputs(metaitem('energy_hatch.input.lv'))
     .duration(200).EUt(30)
+    .buildAndRegister()
+
+//mv energy hatch changes
+crafting.remove('gregtech:energy_hatch.mv')
+mods.gregtech.assembler.removeByOutput([metaitem('energy_hatch.input.mv')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('hull.mv'), metaitem('cableGtSingleCopper') * 2, metaitem('voltage_coil.mv'))
+    .fluidInputs(fluid('sodium_potassium') * 250)
+    .outputs(metaitem('energy_hatch.input.mv'))
+    .duration(300).EUt(120)
     .buildAndRegister()
 
 //pyro oven changes
@@ -251,6 +349,25 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .property('temperature', 1700)
     .buildAndRegister()
 
+//kanthal changes
+mods.gregtech.electric_blast_furnace.removeByOutput([metaitem('ingotHotKanthal')], null)
+mods.gregtech.electric_blast_furnace.recipeBuilder()
+    .inputs(metaitem('dustKanthal'))
+    .circuitMeta(1)
+    .outputs(metaitem('ingotHotKanthal'))
+    .duration(3600).EUt(480)
+    .property('temperature', 1800)
+    .buildAndRegister()
+
+mods.gregtech.electric_blast_furnace.recipeBuilder()
+    .inputs(metaitem('dustKanthal'))
+    .circuitMeta(2)
+    .fluidInputs(fluid('nitrogen') * 1000)
+    .outputs(metaitem('ingotHotKanthal'))
+    .duration(2412).EUt(480)
+    .property('temperature', 1800)
+    .buildAndRegister()
+
 //advanced inscriber changes
 crafting.remove('ae2stuff:recipe1')
 crafting.shapedBuilder()
@@ -283,6 +400,32 @@ crafting.shapedBuilder()
     .key('M', metaitem('electric.motor.lv'))
     .key('G', ore('gearIron'))
     .register()
+
+//mm stuff changes
+//basic mining laser
+crafting.shapedBuilder()
+    .output(item('nomilabs:t1laser'))
+    .matrix(
+        ' F ',
+        'PBP',
+        'PCP')
+    .key('F', ore('blockCrystalFlux'))
+    .key('P', metaitem('plateDoubleSteel'))
+    .key('B', metaitem('energy_crystal').withNbt(['Charge' : 6400000]))
+    .key('C', ore('circuitHv'))
+    .register()
+
+//water -> liquid ice for silicon and kanthal in chembath
+for (var kanthalSilicon: ['Kanthal', 'Silicon']){
+    mods.gregtech.chemical_bath.removeByOutput([metaitem("ingot${kanthalSilicon}")], null)
+    mods.gregtech.chemical_bath.recipeBuilder()
+        .inputs(metaitem("ingotHot${kanthalSilicon}"))
+        .fluidInputs(fluid('ice') * 300)
+        .outputs(metaitem("ingot${kanthalSilicon}"))
+        .duration(800).EUt(120)
+        .buildAndRegister()
+}
+
 
 
 

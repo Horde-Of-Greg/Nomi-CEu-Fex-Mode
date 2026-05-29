@@ -48,3 +48,9 @@ for (var wireType : wireTypes){
 
 //remove t2 board crafting table recipe
 crafting.remove('gregtech:good_circuit_board')
+
+//remove faster silicon recipe
+mods.gregtech.electric_blast_furnace.removeByInput(120, [metaitem('dustSiliconDioxide') * 3, metaitem('dustCarbon') * 2], null)
+
+
+
