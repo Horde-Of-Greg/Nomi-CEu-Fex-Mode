@@ -190,12 +190,13 @@ recipes.addShaped(<enderio:item_item_conduit> * 4, [
 	[<ore:wireGtSinglePulsatingIron>,<ore:wireGtSinglePulsatingIron>,<ore:wireGtSinglePulsatingIron>],
 	[<ore:itemConduitBinder>, <metaitem:foilPolyvinylChloride>, <ore:itemConduitBinder>]]);
 
-//ender fluid conduit - by hand
+//ender fluid conduit - by hand, removed
+/*
 recipes.addShaped(<enderio:item_liquid_conduit:2> * 4, [
 	[<ore:itemConduitBinder>, <metaitem:foilPolyvinylChloride>, <ore:itemConduitBinder>], 
 	[<metaitem:nomilabs:wireGtSingleVibrantAlloy>,<enderio:item_liquid_conduit:1>,<metaitem:nomilabs:wireGtSingleVibrantAlloy>], 
 	[<ore:itemConduitBinder>, <metaitem:foilPolyvinylChloride>, <ore:itemConduitBinder>]]);
-
+*/
 
 //item conduit - assembler
 assembler.recipeBuilder()
@@ -203,9 +204,9 @@ assembler.recipeBuilder()
     .outputs([<enderio:item_item_conduit> * 8])
     .duration(80).EUt(16).buildAndRegister();
 
-//ender fluid conduit - assembler
+//ender fluid conduit - assembler, vibrant alloy wire -> small titanium pipe
 assembler.recipeBuilder()
-    .inputs([<metaitem:nomilabs:wireGtSingleVibrantAlloy> * 2, <enderio:item_liquid_conduit:1>, <ore:itemConduitBinder> * 4, <metaitem:foilPolyvinylChloride> * 2])
+    .inputs([<metaitem:gregtech:pipeSmallFluidTitanium> * 2, <enderio:item_liquid_conduit:1>, <ore:itemConduitBinder> * 4, <metaitem:foilPolyvinylChloride> * 2])
     .outputs([<enderio:item_liquid_conduit:2> * 8])
     .duration(80).EUt(16).buildAndRegister();
 

@@ -33,7 +33,7 @@ makeShaped("of_t1guidance", <nomilabs:t1guidance>,
 	  P : <ore:plateDoubleSteel> }
 );
 
-// Tier 1 Laser
+/* Tier 1 Laser
 makeShaped("of_t1laser", <nomilabs:t1laser>,
 	[" R ",
 	 "QGQ",
@@ -42,7 +42,7 @@ makeShaped("of_t1laser", <nomilabs:t1laser>,
 	  Q : <minecraft:quartz>,
 	  R : <minecraft:redstone_block>}
 );
-
+*/
 
 
 /////////////	 Tier Two Space Ship  	  //////////////////

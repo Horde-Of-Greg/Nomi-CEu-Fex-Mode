@@ -15,7 +15,7 @@ p2pOre.add((p2pVariants*.value))
 crafting.addShapeless(item('appliedenergistics2:part', 460), [p2pOre])
 
 // Assembler Recipes: Any P2P (Ore Dict) + Circuit -> Variant of P2P (Excluding ME)
-for (int i : 0..p2pVariants.size() - 1) {
+/*for (int i : 0..p2pVariants.size() - 1) {
     mods.gregtech.assembler.recipeBuilder()
         .inputs(p2pOre)
         .circuitMeta(i + 1)
@@ -23,3 +23,4 @@ for (int i : 0..p2pVariants.size() - 1) {
         .duration(10).EUt(VA[LV])
         .buildAndRegister()
 }
+removed since no one uses these*/

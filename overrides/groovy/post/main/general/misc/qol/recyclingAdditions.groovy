@@ -42,7 +42,7 @@ addRecyclingToParts('zpm')
 addRecyclingToParts('uv')
 
 // EV, IV, LuV, ZPM, UV and UHV Misc Energy Hatches
-
+/*
 var addRecyclingToHatches = { String tier ->
     changeStackRecycling(metaitem("energy_hatch.input_4a.${tier}"), ASSEMBLER_RECIPES)
     changeStackRecycling(metaitem("energy_hatch.output_4a.${tier}"), ASSEMBLER_RECIPES)
@@ -61,12 +61,13 @@ var addRecyclingToHatches = { String tier ->
     changeStackRecycling(metaitem("laser_hatch.target_4096a.${tier}"), ASSEMBLER_RECIPES)
     changeStackRecycling(metaitem("laser_hatch.source_4096a.${tier}"), ASSEMBLER_RECIPES)
 }
-
+*/
 // EV Hatches (Just 4A Hatches + Adjustable Transformer)
 changeStackRecycling(metaitem('energy_hatch.input_4a.ev'), ASSEMBLER_RECIPES)
 changeStackRecycling(metaitem('energy_hatch.output_4a.ev'), ASSEMBLER_RECIPES)
 changeStackRecycling(metaitem('transformer.adjustable.ev'), ASSEMBLER_RECIPES)
 
+/* ts shi breaking recipe removals
 addRecyclingToHatches('iv')
 
 // LuV+: Energy Hatch (2a) Needs Recycling Added
@@ -93,6 +94,7 @@ changeStackRecycling(metaitem('energy_hatch.output_16a.uhv'), ASSEMBLER_RECIPES)
 
 changeStackRecycling(metaitem('substation_hatch.input_64a.uhv'), ASSEMBLER_RECIPES)
 changeStackRecycling(metaitem('substation_hatch.output_64a.uhv'), ASSEMBLER_RECIPES)
+*/
 
 // Batteries
 var chargeMatcher = NBTMatcher.NOT_PRESENT_OR_HAS_KEY

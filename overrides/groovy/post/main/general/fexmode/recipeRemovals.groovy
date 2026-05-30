@@ -29,4 +29,31 @@ mods.gregtech.assembler.removeByInput(
 mods.gregtech.combustion_generator.removeByInput(32, null, [fluid('naphtha')])
 mods.gregtech.combustion_generator.removeByInput(32, null, [fluid('light_fuel')])
 
+//remove non gt superconductors
+List<String> wireTypes = ['1', '10', '11', '12', '13', '14', '17', '18', '25', '28']
+List<String> wireSizes = ['single', 'double', 'quadruple', 'octal', 'hex']
 
+for (var wireType : wireTypes) {
+    for (var wireSize : wireSizes) {
+        var superconsAll = item("nomilabs:wire_${wireSize}:${wireType}")
+        mods.jei.ingredient.removeAndHide(superconsAll)
+        mods.gregtech.wiremill.removeByOutput([superconsAll], null)
+    }
+}
+
+for (var wireType : wireTypes) {
+    var superconsSingle = item("nomilabs:wire_single:${wireType}")
+    mods.gregtech.extruder.removeByOutput([superconsSingle * 2], null)
+}
+
+//remove t2 board crafting table recipe
+crafting.remove('gregtech:good_circuit_board')
+
+//remove faster silicon recipe
+mods.gregtech.electric_blast_furnace.removeByInput(120, [metaitem('dustSiliconDioxide') * 3, metaitem('dustCarbon') * 2], null)
+
+//remove pe plastic board recipe
+mods.gregtech.chemical_reactor.removeByInput(10,
+    [metaitem('platePlastic'),
+     metaitem('foilCopper') * 4],
+    [fluid('sulfuric_acid') * 250 * 250])

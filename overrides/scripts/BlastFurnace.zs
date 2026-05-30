@@ -70,7 +70,6 @@ blast_furnace.recipeBuilder()
 blast_furnace.recipeBuilder()
 	.inputs([<metaitem:dustAluminium>])
 	.outputs([<metaitem:ingotAluminium>])
-	.circuit(1)
 	.property("temperature", 1700)
 	.duration(6000).EUt(120)
 	.buildAndRegister();
@@ -81,7 +80,7 @@ blast_furnace.recipeBuilder()
 	.fluidInputs(<liquid:nitrogen> * 1000)
 	.circuit(2)
 	.outputs([<metaitem:ingotAluminium>])
-	.property("temperature", 3200)
+	.property("temperature", 1700)
 	.duration(1000).EUt(480)
 	.buildAndRegister();
 
