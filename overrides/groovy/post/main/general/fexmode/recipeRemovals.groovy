@@ -41,7 +41,7 @@ for (var wireType : wireTypes) {
     }
 }
 
-for (var wireType : wireTypes) {
+for (var wireType : wireTypes){
     var superconsSingle = item("nomilabs:wire_single:${wireType}")
     mods.gregtech.extruder.removeByOutput([superconsSingle * 2], null)
 }
@@ -57,3 +57,7 @@ mods.gregtech.chemical_reactor.removeByInput(10,
     [metaitem('platePlastic'),
      metaitem('foilCopper') * 4],
     [fluid('sulfuric_acid') * 250 * 250])
+
+
+
+

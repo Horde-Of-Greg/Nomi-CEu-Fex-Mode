@@ -107,14 +107,11 @@ mods.gregtech.assembler.recipeBuilder()
 
 //voltage coil changes
 //remove all voltage coil recipes lv+
-for (var tier: ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv']) {
+for (var tier: ['lv', 'mv', 'hv', 'ev', 'iv', 'luv', 'zpm', 'uv']){
     mods.gregtech.assembler.removeByOutput([metaitem("voltage_coil.${tier}")], null)
 }
 
-void addVoltageCoilAss (Collection<ItemStack> output,
-                        Collection<IIngredient> input,
-                        IIngredient fluid, Integer length,
-                        Integer energy) {
+void addVoltageCoilAss (Collection<ItemStack> output, Collection<IIngredient> input, IIngredient fluid, Integer length, Integer energy) {
     mods.gregtech.assembler.recipeBuilder()
         .inputs(input)
         .circuitMeta(1)
@@ -201,16 +198,16 @@ mods.gregtech.assembly_line.recipeBuilder()
     .buildAndRegister()
 
 //remove all energy hatch recipes
-for (var hatchTier: ['lv', 'mv']) {
+for (var hatchTier: ['lv', 'mv']){
     crafting.remove("gregtech:energy_hatch.${hatchTier}")
     mods.gregtech.assembler.removeByOutput([metaitem("energy_hatch.input.$hatchTier")], null)
 }
 
-for (var hatchTier: ['hv', 'ev', 'iv']) {
+for (var hatchTier: ['hv', 'ev', 'iv']){
     mods.gregtech.assembler.removeByOutput([metaitem("energy_hatch.input.${hatchTier}")], null)
 }
 
-for (var hatchTier: ['luv', 'zpm', 'uv', 'uhv']) {
+for (var hatchTier: ['luv', 'zpm', 'uv', 'uhv']){
     mods.gregtech.assembly_line.removeByOutput([metaitem("energy_hatch.input.${hatchTier}")], null)
 }
 
@@ -401,7 +398,9 @@ crafting.shapedBuilder()
 crafting.remove('gregtech:maintenance_hatch')
 mods.gregtech.assembler.removeByInput(
     30,
-    [metaitem('hull.lv'), metaitem('circuit.integrated').withNbt(['Configuration': 8])], null)
+    [metaitem('hull.lv'), metaitem('circuit.integrated').withNbt(['Configuration': 8])],
+    null
+)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('plateIron') * 2, metaitem('plateLead') * 2, metaitem ('ringRubber'))
     .circuitMeta(8)
@@ -530,7 +529,7 @@ crafting.shapedBuilder()
     .register()
 
 //water -> liquid ice for silicon and kanthal in chembath
-for (var kanthalSilicon: ['Kanthal', 'Silicon']) {
+for (var kanthalSilicon: ['Kanthal', 'Silicon']){
     mods.gregtech.chemical_bath.removeByOutput([metaitem("ingot${kanthalSilicon}")], null)
     mods.gregtech.chemical_bath.recipeBuilder()
         .inputs(metaitem("ingotHot${kanthalSilicon}"))
