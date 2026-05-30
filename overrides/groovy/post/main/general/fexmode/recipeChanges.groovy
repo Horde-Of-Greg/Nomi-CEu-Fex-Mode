@@ -211,7 +211,7 @@ for (var hatchTier: ['luv', 'zpm', 'uv', 'uhv']){
     mods.gregtech.assembly_line.removeByOutput([metaitem("energy_hatch.input.${hatchTier}")], null)
 }
 
-//lv energy hatch now requires 250mb of NaK
+//lv energy hatch
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv'))
     .fluidInputs(fluid('sodium_potassium') * 250)
@@ -219,12 +219,97 @@ mods.gregtech.assembler.recipeBuilder()
     .duration(200).EUt(30)
     .buildAndRegister()
 
-//mv energy hatch changes
+//mv energy hatch
 mods.gregtech.assembler.recipeBuilder()
-    .inputs(metaitem('hull.mv'), metaitem('cableGtSingleCopper') * 2, metaitem('voltage_coil.mv'))
+    .inputs(metaitem('hull.mv'), metaitem('cableGtSingleCopper') * 2,
+        metaitem('voltage_coil.mv'), metaitem('electric.pump.mv'),
+        metaitem('plate.ultra_low_power_integrated_circuit') * 2)
     .fluidInputs(fluid('sodium_potassium') * 500)
     .outputs(metaitem('energy_hatch.input.mv'))
-    .duration(300).EUt(120)
+    .duration(400).EUt(120)
+    .buildAndRegister()
+
+//hv energy hatch
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('hull.hv'), metaitem('cableGtSingleGold') * 4,
+        metaitem('voltage_coil.hv'), metaitem('electric.pump.hv'),
+        metaitem('plate.low_power_integrated_circuit') * 4)
+    .fluidInputs(fluid('sodium_potassium') * 1000)
+    .outputs(metaitem('energy_hatch.input.hv'))
+    .duration(600).EUt(480)
+    .buildAndRegister()
+
+//ev energy hatch
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('hull.ev'), metaitem('cableGtSingleAluminium') * 8,
+        metaitem('voltage_coil.ev'), metaitem('electric.pump.ev') * 2,
+        metaitem('plate.power_integrated_circuit') * 6, ore('circuitEv'))
+    .fluidInputs(fluid('sodium_potassium') * 2000)
+    .outputs(metaitem('energy_hatch.input.ev'))
+    .duration(900).EUt(1920)
+    .buildAndRegister()
+
+//iv energy hatch
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('charger.iv'), metaitem('cableGtSingleTungsten') * 16,
+        metaitem('voltage_coil.iv'), metaitem('fluid.regulator.iv') * 2,
+        metaitem('plate.high_power_integrated_circuit') * 12, ore('circuitIv'))
+    .fluidInputs(fluid('sodium_potassium') * 4000)
+    .outputs(metaitem('energy_hatch.input.iv'))
+    .duration(1400).EUt(7680)
+    .buildAndRegister()
+
+//luv energy hatch
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('charger.luv'), metaitem('cableGtSingleNiobiumTitanium') * 16,
+        metaitem('voltage_coil.luv'), metaitem('fluid.regulator.luv') * 2,
+        metaitem('wafer.high_power_integrated_circuit') * 12, metaitem('plate.ultra_high_power_integrated_circuit') * 8,
+        ore('circuitLuv') * 2)
+    .fluidInputs(fluid('sodium_potassium') * 8000, fluid('soldering_alloy') * 1440,
+        fluid('indium_tin_barium_titanium_cuprate') * 720)
+    .outputs(metaitem('energy_hatch.input.luv'))
+    .scannerResearch(b -> b.researchStack(metaitem('energy_hatch.input.iv')))
+    .duration(2400).EUt(30720)
+    .buildAndRegister()
+
+//zpm energy hatch
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('charger.zpm'), metaitem('cableGtSingleVanadiumGallium') * 16,
+        metaitem('voltage_coil.zpm') * 2, metaitem('fluid.regulator.zpm') * 2,
+        metaitem('wafer.high_power_integrated_circuit') * 20, metaitem('plate.ultra_high_power_integrated_circuit') * 16,
+        ore('circuitZpm') * 4)
+    .fluidInputs(fluid('sodium_potassium') * 16000, fluid('soldering_alloy') * 2880,
+        fluid('uranium_rhodium_dinaquadide') * 1440)
+    .outputs(metaitem('energy_hatch.input.zpm'))
+    //this adds research but it doesnt work with the custom CWU and eu parameters
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.luv')).CWUt(16).EUt(30720))
+    .duration(3600).EUt(122880)
+    .buildAndRegister()
+
+//uv energy hatch
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('charger.uv'), metaitem('cableGtSingleYttriumBariumCuprate') * 16,
+        metaitem('voltage_coil.uv') * 2, metaitem('fluid.regulator.uv') * 4,
+        metaitem('wafer.high_power_integrated_circuit') * 32, metaitem('plate.ultra_high_power_integrated_circuit') * 32,
+        ore('circuitUv') * 4)
+    .fluidInputs(fluid('sodium_potassium') * 32000, fluid('soldering_alloy') * 5760,
+        fluid('enriched_naquadah_trinium_europium_duranide') * 2880)
+    .outputs(metaitem('energy_hatch.input.uv'))
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.zpm')).CWUt(64).EUt(122880))
+    .duration(6000).EUt(491520)
+    .buildAndRegister()
+
+//uhv energy hatch
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('substation_hatch.input_64a.uv'),
+        metaitem('cableGtSingleEuropium') * 16, item('gregtech:fusion_casing:4'),
+        metaitem('wafer.high_power_integrated_circuit') * 64, metaitem('plate.ultra_high_power_integrated_circuit') * 64,
+        ore('plateDoubleAwakenedDraconium') * 16, ore('circuitUhv') * 16)
+    .fluidInputs(fluid('sodium_potassium') * 64000, fluid('soldering_alloy') * 11520,
+        fluid('ruthenium_trinium_americium_neutronate') * 5760)
+    .outputs(metaitem('energy_hatch.input.uhv'))
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.uv')).CWUt(256).EUt(1966080))
+    .duration(6400).EUt(1966080)
     .buildAndRegister()
 
 //pyro oven changes
@@ -323,7 +408,7 @@ mods.gregtech.assembler.recipeBuilder()
     .duration(200).EUt(30)
     .buildAndRegister()
 
-//circuit assembler changes
+//lv circuit assembler
 crafting.remove('gregtech:gregtech.machine.circuit_assembler.lv')
 crafting.shapedBuilder()
     .output(metaitem('circuit_assembler.lv'))
@@ -338,6 +423,23 @@ crafting.shapedBuilder()
     .key('H', metaitem('hull.lv'))
     .key('M', ore('circuitMv'))
     .key('F', metaitem('field.generator.lv'))
+    .register()
+
+//mv circuit assembler
+crafting.remove('gregtech:gregtech.machine.circuit_assembler.mv')
+crafting.shapedBuilder()
+    .output(metaitem('circuit_assembler.mv'))
+    .matrix(
+        'APE',
+        'CHC',
+        'MFM')
+    .key('A', metaitem('robot.arm.mv'))
+    .key('P', metaitem('pipeNormalFluidVanadiumSteel'))
+    .key('E', metaitem('emitter.mv'))
+    .key('C', metaitem('conveyor.module.mv'))
+    .key('H', metaitem('hull.mv'))
+    .key('M', ore('circuitHv'))
+    .key('F', metaitem('field.generator.mv'))
     .register()
 
 //stainless steel changes
@@ -395,7 +497,8 @@ crafting.shapedBuilder()
 //pcc changes
 crafting.remove('nae2:item/upgrade/gregtech_circuit')
 mods.gregtech.assembler.recipeBuilder()
-    .inputs(item('appliedenergistics2:material:53'), ore('circuitEv') * 2, metaitem('circuit.integrated').withNbt(['Configuration' : 0]) * 16)
+    .inputs(item('appliedenergistics2:material:53'), ore('circuitEv') * 2,
+        metaitem('circuit.integrated').withNbt(['Configuration' : 0]) * 16)
     .fluidInputs(fluid('plastic') * 576)
     .outputs(item('nae2:upgrade:2'))
     .duration(300).EUt(480)
@@ -436,6 +539,14 @@ for (var kanthalSilicon: ['Kanthal', 'Silicon']){
         .buildAndRegister()
 }
 
-
-
-
+//pvc plastic board nerfed to return only 1, 4 -> 8 copper foils, duration 25s -> 30s (now matches 1:1 ratio)
+mods.gregtech.chemical_reactor.removeByInput(10,
+    [metaitem('platePolyvinylChloride'),
+     metaitem('foilCopper') * 4],
+    [fluid('sulfuric_acid') * 250])
+mods.gregtech.chemical_reactor.recipeBuilder()
+    .inputs(metaitem('platePolyvinylChloride'), metaitem('foilCopper') * 8)
+    .fluidInputs(fluid('sulfuric_acid') * 250)
+    .outputs(metaitem('board.plastic'))
+    .duration(600).EUt(10)
+    .buildAndRegister()

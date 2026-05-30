@@ -52,5 +52,12 @@ crafting.remove('gregtech:good_circuit_board')
 //remove faster silicon recipe
 mods.gregtech.electric_blast_furnace.removeByInput(120, [metaitem('dustSiliconDioxide') * 3, metaitem('dustCarbon') * 2], null)
 
+//remove pe plastic board recipe
+mods.gregtech.chemical_reactor.removeByInput(10,
+    [metaitem('platePlastic'),
+     metaitem('foilCopper') * 4],
+    [fluid('sulfuric_acid') * 250 * 250])
+
+
 
 
