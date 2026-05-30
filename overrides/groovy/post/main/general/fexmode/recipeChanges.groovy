@@ -197,9 +197,21 @@ mods.gregtech.assembly_line.recipeBuilder()
     .duration(5600).EUt(491520)
     .buildAndRegister()
 
+//remove all energy hatch recipes
+for (var hatchTier: ['lv', 'mv']){
+    crafting.remove("gregtech:energy_hatch.${hatchTier}")
+    mods.gregtech.assembler.removeByOutput([metaitem("energy_hatch.input.$hatchTier")], null)
+}
+
+for (var hatchTier: ['hv', 'ev', 'iv']){
+    mods.gregtech.assembler.removeByOutput([metaitem("energy_hatch.input.${hatchTier}")], null)
+}
+
+for (var hatchTier: ['luv', 'zpm', 'uv', 'uhv']){
+    mods.gregtech.assembly_line.removeByOutput([metaitem("energy_hatch.input.${hatchTier}")], null)
+}
+
 //lv energy hatch now requires 250mb of NaK
-crafting.remove('gregtech:energy_hatch.lv')
-mods.gregtech.assembler.removeByOutput([metaitem('energy_hatch.input.lv')], null)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv'))
     .fluidInputs(fluid('sodium_potassium') * 250)
@@ -208,11 +220,9 @@ mods.gregtech.assembler.recipeBuilder()
     .buildAndRegister()
 
 //mv energy hatch changes
-crafting.remove('gregtech:energy_hatch.mv')
-mods.gregtech.assembler.removeByOutput([metaitem('energy_hatch.input.mv')], null)
 mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.mv'), metaitem('cableGtSingleCopper') * 2, metaitem('voltage_coil.mv'))
-    .fluidInputs(fluid('sodium_potassium') * 250)
+    .fluidInputs(fluid('sodium_potassium') * 500)
     .outputs(metaitem('energy_hatch.input.mv'))
     .duration(300).EUt(120)
     .buildAndRegister()
