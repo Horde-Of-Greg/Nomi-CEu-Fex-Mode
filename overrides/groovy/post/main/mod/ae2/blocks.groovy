@@ -98,17 +98,18 @@ crafting.shapedBuilder()
     .key('L', item('appliedenergistics2:material', 22))
     .replace().register()
 
-// Molecular Assembler
+// Molecular Assembler, buffed
 crafting.shapedBuilder()
     .output(item('appliedenergistics2:molecular_assembler'))
     .matrix(
-        'PGP',
+        'RGR',
         'ACF',
         'PGP')
-    .key('P', metaitem('plateAluminium'))
+    .key('R', metaitem('robot.arm.mv'))
     .key('G', item('appliedenergistics2:quartz_glass'))
+    .key('P', metaitem('gearAluminium'))
     .key('A', item('appliedenergistics2:material', 44))
-    .key('C', metaitem('workbench'))
+    .key('C', item('appliedenergistics2:crafting_unit'))
     .key('F', item('appliedenergistics2:material', 43))
     .replace().register()
 

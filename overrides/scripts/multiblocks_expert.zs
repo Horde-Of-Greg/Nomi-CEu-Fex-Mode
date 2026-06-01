@@ -660,7 +660,7 @@ microverse_projector_3.recipeBuilder()
     .outputs(<nomilabs:heartofauniverse>)
     .buildAndRegister();
 
-
+/* commented all actualization chamber shits to remove
 // actualization
 // t1 ores
 actualization_chamber.recipeBuilder()
@@ -1048,6 +1048,7 @@ actualization_chamber.recipeBuilder()
              <minecraft:dragon_egg> * 64,
              <minecraft:dragon_egg> * 64)
     .buildAndRegister();
+    */
 
 // Naquadah Reactor Mk1 Recipes
 naquadah_reactor_1.recipeBuilder()

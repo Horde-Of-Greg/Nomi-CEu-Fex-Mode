@@ -62,3 +62,4 @@ mods.gregtech.fluid_solidifier.recipeBuilder()
     .outputs(metaitem('ingotCrosslinkedPolyethylene'))
     .duration(100).EUt(7)
     .buildAndRegister()
+

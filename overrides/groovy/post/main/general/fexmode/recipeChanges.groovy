@@ -443,6 +443,16 @@ crafting.shapedBuilder()
     .key('F', metaitem('field.generator.mv'))
     .register()
 
+/*hv assembler, buffed and moved to ass
+crafting.remove('gregtech:gregtech.machine.assembler.hv')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem(''), metaitem('') * 2, metaitem(''))
+    .fluidInputs(fluid('') * 144)
+    .outputs(metaitem(''))
+    .duration(200).EUt(30)
+    .buildAndRegister()
+*/
+
 //stainless steel changes
 mods.gregtech.electric_blast_furnace.removeByOutput([metaitem('ingotStainlessSteel')], null)
 mods.gregtech.electric_blast_furnace.recipeBuilder()
@@ -505,16 +515,6 @@ mods.gregtech.assembler.recipeBuilder()
     .duration(300).EUt(480)
     .buildAndRegister()
 
-crafting.shapedBuilder()
-    .output(item('minecraft:apple'))
-    .matrix(
-        'MMM',
-        'MGM',
-        'MMM')
-    .key('M', metaitem('electric.motor.lv'))
-    .key('G', ore('gearIron'))
-    .register()
-
 //mm stuff changes
 //basic mining laser
 crafting.shapedBuilder()
@@ -551,3 +551,97 @@ mods.gregtech.chemical_reactor.recipeBuilder()
     .outputs(metaitem('board.plastic'))
     .duration(600).EUt(10)
     .buildAndRegister()
+
+//distillation tower buffed and moved to ass
+crafting.remove('gregtech:distillation_tower')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('distillery.hv'),
+        item('gregtech:wire_coil:2') * 4,
+        metaitem('pipeHugeFluidStainlessSteel') * 6,
+        metaitem('electric.pump.hv') * 8,
+        ore('circuitEv') * 12)
+    .fluidInputs(fluid('lubricant') * 16000)
+    .outputs(metaitem('distillation_tower'))
+    .duration(1200).EUt(480)
+    .buildAndRegister()
+
+//titanium loop no longer closed, 2 -> 4 magnesium :problem:, also buffed duration for ebf
+mods.gregtech.electric_blast_furnace.removeByInput(480, [metaitem('dustMagnesium') * 2],
+    [fluid('titanium_tetrachloride') * 1000 * 1000])
+mods.gregtech.electric_blast_furnace.recipeBuilder()
+    .inputs(metaitem('dustMagnesium') * 4)
+    .fluidInputs(fluid('titanium_tetrachloride') * 1100)
+    .outputs(metaitem('ingotHotTitanium'), metaitem('dustMagnesiumChloride') * 6)
+    .duration(4000).EUt(480)
+    .property('temperature', 2141)
+    .buildAndRegister()
+
+//NaK "realism"
+mods.gregtech.chemical_reactor.removeByOutput(null, [fluid('sodium_potassium')])
+mods.gregtech.chemical_reactor.recipeBuilder()
+    .inputs(metaitem('dustPotassium') * 4, metaitem('dustSodium'))
+    .fluidOutputs(fluid('sodium_potassium') * 720)
+    .duration(800).EUt(30)
+    .buildAndRegister()
+
+//me out hatch
+mods.gregtech.assembler.removeByOutput([metaitem('me_export_fluid_hatch')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('fluid_hatch.export.ev'), item('appliedenergistics2:drive'),
+        metaitem('super_tank.ev') * 10, item('appliedenergistics2:part:221') * 4)
+    .outputs(metaitem('me_export_fluid_hatch'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me in hatch
+mods.gregtech.assembler.removeByOutput([metaitem('me_import_fluid_hatch')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('fluid_hatch.import.ev'), item('appliedenergistics2:fluid_interface') * 4,
+        metaitem('electric.pump.ev') * 4)
+    .outputs(metaitem('me_import_fluid_hatch'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me out bus
+mods.gregtech.assembler.removeByOutput([metaitem('me_export_item_bus')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('item_bus.export.ev'), item('appliedenergistics2:drive'),
+        metaitem('super_chest.ev') * 10, item('appliedenergistics2:part:220') * 4)
+    .outputs(metaitem('me_export_item_bus'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me in bus
+mods.gregtech.assembler.removeByOutput([metaitem('me_import_item_bus')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('item_bus.import.ev'), item('appliedenergistics2:interface') * 4,
+        metaitem('conveyor.module.ev') * 4)
+    .outputs(metaitem('me_import_item_bus'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//stocking bus and hatch
+for (var stockingType: ['fluid_hatch', 'item_bus']) {
+mods.gregtech.assembler.removeByOutput([metaitem("me_stocking_${stockingType}")], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem("${stockingType}.import.iv"), metaitem("me_import_${stockingType}"),
+        item('nae2:exposer') * 4, item('appliedenergistics2:io_port') * 4,
+        metaitem('field.generator.iv') * 4, item('appliedenergistics2:material', 30) * 16)
+    .fluidInputs(fluid('nether_star') * 2592)
+    .outputs(metaitem("me_stocking_${stockingType}"))
+    .duration(800).EUt(7920)
+    .buildAndRegister()
+}
+
+//lcr, buffed and moved to ass
+crafting.remove('gregtech:large_chemical_reactor')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('chemical_reactor.hv') * 4, metaitem('fluid.regulator.hv') * 2,
+        metaitem('pipeNonupleFluidPolytetrafluoroethylene') * 4,
+        item('gregtech:meta_item_1', 711).withNbt(['GT.PartStats': ['Material': 'gregtech:stainless_steel']]),
+        ore('circuitEv') * 4)
+    .outputs(metaitem('large_chemical_reactor'))
+    .duration(700).EUt(480)
+    .buildAndRegister()
+
+

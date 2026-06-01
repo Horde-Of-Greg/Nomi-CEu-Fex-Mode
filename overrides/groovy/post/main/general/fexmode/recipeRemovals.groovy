@@ -57,3 +57,18 @@ mods.gregtech.chemical_reactor.removeByInput(10,
     [metaitem('platePlastic'),
      metaitem('foilCopper') * 4],
     [fluid('sulfuric_acid') * 250 * 250])
+
+//remove non lcr epoxy recipe
+mods.gregtech.chemical_reactor.removeByInput(30,
+    [metaitem('dustSodiumHydroxide') * 3],
+    [fluid('epichlorohydrin') * 1000 * 1000,
+     fluid('bisphenol_a') * 1000 * 1000])
+
+//remove me hatches and busses in to out and vice versa
+crafting.remove('gregtech:me_fluid_hatch_input_to_output')
+crafting.remove('gregtech:me_fluid_hatch_output_to_input')
+crafting.remove('gregtech:me_item_bus_input_to_output')
+crafting.remove('gregtech:me_item_bus_output_to_input')
+
+//remove actualization chamber recipes
+
