@@ -24,7 +24,7 @@ if (LabsModeHelper.expert) {
     changeStackRecycling(metaitem('fluid_hatch.export_9x.iv'), ASSEMBLER_RECIPES)
 }
 
-// LuV, ZPM and UV Parts
+/* LuV, ZPM and UV Parts commented cuz fuh shit up
 var addRecyclingToParts = { String tier ->
     changeStackRecycling(metaitem("electric.motor.${tier}"), ASSEMBLY_LINE_RECIPES)
     changeStackRecycling(metaitem("electric.pump.${tier}"), ASSEMBLY_LINE_RECIPES)
@@ -37,12 +37,13 @@ var addRecyclingToParts = { String tier ->
     changeStackRecycling(metaitem("fluid.regulator.${tier}"), ASSEMBLER_RECIPES)
 }
 
+
 addRecyclingToParts('luv')
 addRecyclingToParts('zpm')
 addRecyclingToParts('uv')
 
 // EV, IV, LuV, ZPM, UV and UHV Misc Energy Hatches
-/*
+
 var addRecyclingToHatches = { String tier ->
     changeStackRecycling(metaitem("energy_hatch.input_4a.${tier}"), ASSEMBLER_RECIPES)
     changeStackRecycling(metaitem("energy_hatch.output_4a.${tier}"), ASSEMBLER_RECIPES)

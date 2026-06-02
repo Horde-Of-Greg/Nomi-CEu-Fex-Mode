@@ -644,4 +644,80 @@ mods.gregtech.assembler.recipeBuilder()
     .duration(700).EUt(480)
     .buildAndRegister()
 
+//comp buffs hv-iv
+void makeMotor (String recipeName, ItemStack output,
+                Collection <IIngredient> input, IIngredient fluid,
+                Integer length, Integer energy) {
+
+    crafting.remove(recipeName)
+    mods.gregtech.assembler.removeByOutput([output], null)
+    mods.gregtech.assembler.recipeBuilder()
+        .inputs(input)
+        .outputs(output)
+        .fluidInputs(fluid)
+        .duration(length).EUt(energy)
+        .buildAndRegister()
+}
+//hv motor
+makeMotor('gregtech:electric_motor_hv', metaitem('electric.motor.hv'),
+    [metaitem('cableGtDoubleSilver') * 4, metaitem('stickStainlessSteel') * 4,
+     metaitem('stickSteelMagnetic') * 2, metaitem('boltIronMagnetic') * 16,
+     metaitem('wireFineStainlessSteel') * 64, metaitem('wireGtDoubleElectrum') * 8],
+    fluid('lubricant') * 288, 200, 64)
+//ev motor
+makeMotor('gregtech:electric_motor_ev', metaitem('electric.motor.ev'),
+    [metaitem('cableGtQuadrupleAluminium') * 6, metaitem('stickTitanium') * 6,
+     metaitem('ringTitanium') * 16, metaitem('stickNeodymiumMagnetic') * 4,
+     metaitem('nuggetSteelMagnetic') * 64, metaitem('wireFinePalladium') * 64,
+     metaitem('wireFinePalladium') * 32], fluid('lubricant') * 432,
+    300, 256)
+//iv motor
+makeMotor('gregtech:electric_motor_iv', metaitem('electric.motor.iv'),
+    [metaitem('cableGtQuadrupleTungsten') * 8, metaitem('stickTungstenSteel') * 10,
+     metaitem('ringChrome') * 24, metaitem('gearRhodium') * 4,
+     metaitem('stickLongSamariumMagnetic') * 4, metaitem('wireFineTungstenSteel') * 64,
+     metaitem('wireFineTungstenSteel') * 64, metaitem('wireGtDoubleGraphene') * 12],
+    fluid('lubricant') * 576, 400, 1024)
+
+//luv+ motor removals
+for (var tier: ['luv', 'zpm', 'uv']) {
+    mods.gregtech.assembly_line.removeByOutput([metaitem("electric.motor.${tier}")], null)
+}
+
+//luv motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 8, metaitem('stickLongHsss') * 12,
+        metaitem('gearHsss') * 8, metaitem('nuggetTrinium') * 32,
+        metaitem('gearSmallTungstenCarbide') * 16, metaitem('foilRuridit') * 64,
+        metaitem('wireFineRuridit') * 64)
+    .fluidInputs(fluid('molten.titanium_tungsten_carbide') * 864, fluid('soldering_alloy') * 1152, fluid('lubricant') * 1000)
+    .outputs(metaitem('electric.motor.luv'))
+    .scannerResearch(b -> b.researchStack(metaitem('electric.motor.iv')))
+    .duration(800).EUt(30720)
+    .buildAndRegister()
+
+//zpm motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 12, metaitem('stickLongOsmiridium') * 20,
+        metaitem('plateOsmiridium') * 32, metaitem('nuggetNaquadahEnriched') * 48,
+        metaitem('gearDuranium') * 12, metaitem('wireGtDoubleEuropium') * 64,
+        metaitem('foilNaquadahAlloy') * 64)
+    .fluidInputs(fluid('molten.enderium') * 1152, fluid('soldering_alloy') * 2304, fluid('lubricant') * 6000)
+    .outputs(metaitem('electric.motor.zpm'))
+    .scannerResearch(b -> b.researchStack(metaitem('electric.motor.luv')))
+    .duration(1000).EUt(122880)
+    .buildAndRegister()
+
+//uv motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 24, metaitem('ingotLutetium') * 64,
+        metaitem('ingotCalifornium') * 64, metaitem('nuggetTrinaquadalloy') * 64,
+        metaitem('wireFineNaquadria') * 64, metaitem('wireGtSingleUraniumRhodiumDinaquadide') * 64,
+        item('nuclearcraft:part', 2) * 64)
+    .fluidInputs(fluid('awakened_draconium') * 1152, fluid('neutronium') * 432,
+        fluid('soldering_alloy') * 6912, fluid('lubricant') * 30000)
+    .outputs(metaitem('electric.motor.uv'))
+    .stationResearch(b -> b.researchStack(metaitem('electric.motor.zpm')).CWUt(32).EUt(30720))
+    .duration(1200).EUt(491520)
+    .buildAndRegister()
 
