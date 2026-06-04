@@ -57,3 +57,11 @@ mods.gregtech.materialEvent {
         .build()
 }
 */
+
+//Fexium
+mods.gregtech.materialEvent {
+    materialBuilder(6706, 'fexium')
+        .ingot()
+        .color(0xF719FF)
+        .build()
+}

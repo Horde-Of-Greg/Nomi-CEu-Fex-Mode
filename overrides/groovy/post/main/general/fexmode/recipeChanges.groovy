@@ -1,5 +1,7 @@
 package post.main.general.fexmode
 
+import gregtech.api.metatileentity.multiblock.CleanroomType
+
 //Diamond Hook diamonds -> plates
 crafting.remove('hooked:diamond_hook')
 crafting.shapedBuilder()
@@ -443,6 +445,16 @@ crafting.shapedBuilder()
     .key('F', metaitem('field.generator.mv'))
     .register()
 
+/*hv assembler, buffed and moved to ass
+crafting.remove('gregtech:gregtech.machine.assembler.hv')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem(''), metaitem('') * 2, metaitem(''))
+    .fluidInputs(fluid('') * 144)
+    .outputs(metaitem(''))
+    .duration(200).EUt(30)
+    .buildAndRegister()
+*/
+
 //stainless steel changes
 mods.gregtech.electric_blast_furnace.removeByOutput([metaitem('ingotStainlessSteel')], null)
 mods.gregtech.electric_blast_furnace.recipeBuilder()
@@ -458,7 +470,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .circuitMeta(2)
     .fluidInputs(fluid('helium') * 500)
     .outputs(metaitem('ingotStainlessSteel'))
-    .duration(1600).EUt(1920)
+    .duration(3000).EUt(1920)
     .property('temperature', 1700)
     .buildAndRegister()
 
@@ -480,6 +492,60 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .duration(2412).EUt(480)
     .property('temperature', 1800)
     .buildAndRegister()
+
+//titanium loop no longer closed, 2 -> 4 magnesium :problem:, also buffed duration for ebf
+mods.gregtech.electric_blast_furnace.removeByInput(480, [metaitem('dustMagnesium') * 2],
+    [fluid('titanium_tetrachloride') * 1000 * 1000])
+mods.gregtech.electric_blast_furnace.recipeBuilder()
+    .inputs(metaitem('dustMagnesium') * 4)
+    .fluidInputs(fluid('titanium_tetrachloride') * 1100)
+    .outputs(metaitem('ingotHotTitanium'), metaitem('dustMagnesiumChloride') * 6)
+    .duration(4000).EUt(480)
+    .property('temperature', 2141)
+    .buildAndRegister()
+
+//abs recipes completely removed rn cuz of laziness and also i dont like them
+mods.gregtech.alloy_blast_smelter.removeByOutput(null, [fluid('molten.tungsten_steel')])
+mods.gregtech.alloy_blast_smelter.removeByOutput(null, [fluid('molten.tungsten_carbide')])
+
+//theres prob a better way to do this
+for(var tungType: ['n', 'nSteel', 'nCarbide']) {
+    mods.gregtech.electric_blast_furnace.removeByOutput([metaitem("ingotHotTungste${tungType}")], null)
+}
+
+//new tung ebf recipes
+List<String> tungstenTypeDust = [metaitem('dustTungsten'),
+                                 metaitem('dustTungstenSteel'),
+                                 metaitem('dustTungstenCarbide')]
+List<String> tungstenTypeIngot = [metaitem('ingotHotTungsten'),
+                                  metaitem('ingotHotTungstenSteel'),
+                                  metaitem('ingotHotTungstenCarbide')]
+List<Integer> tungSmeltTime = [8200, 10400, 7800]
+List<Integer> tungSmeltTimeGas = [2740, 3460, 2600]
+List<Integer> tungTemp = [3600, 4000, 3058]
+
+//without gas
+for(int i = 0; i < 3 ; i++) {
+    mods.gregtech.electric_blast_furnace.recipeBuilder()
+        .inputs(tungstenTypeDust[i])
+        .circuitMeta(1)
+        .outputs(tungstenTypeIngot[i])
+        .duration(tungSmeltTime[i]).EUt(1920)
+        .property('temperature', tungTemp[i])
+        .buildAndRegister()
+}
+
+//with gas
+for(int i = 0; i < 3 ; i++) {
+    mods.gregtech.electric_blast_furnace.recipeBuilder()
+        .inputs(tungstenTypeDust[i])
+        .circuitMeta(2)
+        .fluidInputs(fluid('argon') * 100)
+        .outputs(tungstenTypeIngot[i])
+        .duration(tungSmeltTimeGas[i]).EUt(7680)
+        .property('temperature', tungTemp[i])
+        .buildAndRegister()
+}
 
 //advanced inscriber changes
 crafting.remove('ae2stuff:recipe1')
@@ -504,16 +570,6 @@ mods.gregtech.assembler.recipeBuilder()
     .outputs(item('nae2:upgrade:2'))
     .duration(300).EUt(480)
     .buildAndRegister()
-
-crafting.shapedBuilder()
-    .output(item('minecraft:apple'))
-    .matrix(
-        'MMM',
-        'MGM',
-        'MMM')
-    .key('M', metaitem('electric.motor.lv'))
-    .key('G', ore('gearIron'))
-    .register()
 
 //mm stuff changes
 //basic mining laser
@@ -540,6 +596,87 @@ for (var kanthalSilicon: ['Kanthal', 'Silicon']) {
         .buildAndRegister()
 }
 
+//change t2 cir theme to not work with smd also some slight buffs
+//removals
+// Integrated Processor * 1
+mods.gregtech.circuit_assembler.removeByInput(60,
+    [metaitem('circuit_board.plastic'),
+     metaitem('plate.central_processing_unit'),
+     metaitem('component.resistor') * 4,
+     metaitem('component.capacitor') * 4,
+     metaitem('component.transistor') * 4,
+     metaitem('wireFineRedAlloy') * 4],
+    [fluid('soldering_alloy') * 72 * 72])
+// Integrated Processor * 1
+mods.gregtech.circuit_assembler.removeByInput(60,
+    [metaitem('circuit_board.plastic'),
+     metaitem('plate.central_processing_unit'),
+     metaitem('component.resistor') * 4,
+     metaitem('component.capacitor') * 4,
+     metaitem('component.transistor') * 4,
+     metaitem('wireFineRedAlloy') * 4],
+    [fluid('tin') * 144 * 144])
+
+//these are ez cuz no soc recipe
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.assembly')], null)
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.workstation')], null)
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.mainframe')], null)
+
+//changes
+//integrated processor
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('plate.central_processing_unit') * 2,
+        metaitem('component.resistor') * 4,
+        metaitem('component.capacitor') * 4,
+        metaitem('component.transistor') * 4,
+        metaitem('wireFineRedAlloy') * 8)
+    .fluidInputs(fluid('soldering_alloy') * 72)
+    .outputs(metaitem('circuit.processor'))
+    .duration(300).EUt(60)
+    .buildAndRegister()
+
+//processor assembly
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('circuit.processor') * 2,
+        metaitem('component.inductor') * 8,
+        metaitem('component.capacitor') * 12,
+        metaitem('plate.random_access_memory') * 8,
+        metaitem('wireFineRedAlloy') * 16)
+    .fluidInputs(fluid('soldering_alloy') * 144)
+    .outputs(metaitem('circuit.assembly'))
+    .duration(600).EUt(90)
+    .buildAndRegister()
+
+//workstation
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('circuit.assembly') * 2,
+        metaitem('component.diode') * 8,
+        metaitem('plate.random_access_memory') * 8,
+        metaitem('wireFineElectrum') * 32,
+        metaitem('nomilabs:boltVibrantAlloy') * 32)
+    .fluidInputs(fluid('soldering_alloy') * 144)
+    .outputs(metaitem('circuit.workstation'))
+    .cleanroom(CleanroomType.CLEANROOM)
+    .duration(600).EUt(120)
+    .buildAndRegister()
+
+//mainframe
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('frameAluminium') * 4,
+        metaitem('circuit.workstation') * 4,
+        metaitem('component.inductor') * 24,
+        metaitem('component.capacitor') * 32,
+        metaitem('plate.random_access_memory') * 16,
+        metaitem('wireGtSingleAnnealedCopper') * 16)
+    .fluidInputs(fluid('soldering_alloy') * 288)
+    .outputs(metaitem('circuit.mainframe'))
+    .cleanroom(CleanroomType.CLEANROOM)
+    .duration(1200).EUt(480)
+    .buildAndRegister()
+
 //pvc plastic board nerfed to return only 1, 4 -> 8 copper foils, duration 25s -> 30s (now matches 1:1 ratio)
 mods.gregtech.chemical_reactor.removeByInput(10,
     [metaitem('platePolyvinylChloride'),
@@ -550,4 +687,187 @@ mods.gregtech.chemical_reactor.recipeBuilder()
     .fluidInputs(fluid('sulfuric_acid') * 250)
     .outputs(metaitem('board.plastic'))
     .duration(600).EUt(10)
+    .buildAndRegister()
+
+//epoxy board 500mb sulfuric acid -> 2b, 30s at lv -> 30s at hv, buffed and moved to lcr
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('board.epoxy')], null)
+mods.gregtech.large_chemical_reactor.recipeBuilder()
+    .inputs(metaitem('plateEpoxy') * 2, metaitem('foilGold') * 20)
+    .fluidInputs(fluid('sulfuric_acid') * 2000)
+    .outputs(metaitem('board.epoxy'))
+    .duration(600).EUt(480)
+    .buildAndRegister()
+
+//prob useless to have a map here but i wanted to test
+var epoxyCirBoard = [
+    (fluid('iron_iii_chloride')) : 500,
+    (fluid('sodium_persulfate')) : 1000,
+]
+
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('circuit_board.advanced')], null)
+epoxyCirBoard.forEach { IIngredient fluid, Integer amount ->
+    mods.gregtech.large_chemical_reactor.recipeBuilder()
+        .inputs(metaitem('board.epoxy'), metaitem('foilElectrum') * 12, metaitem('cableGtSingleAnnealedCopper') * 6)
+        .fluidInputs(fluid * amount)
+        .outputs(metaitem('circuit_board.advanced'))
+        .duration(700).EUt(480)
+        .buildAndRegister()
+}
+
+//distillation tower buffed and moved to ass
+crafting.remove('gregtech:distillation_tower')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('distillery.hv'),
+        item('gregtech:wire_coil:2') * 4,
+        metaitem('pipeHugeFluidStainlessSteel') * 6,
+        metaitem('electric.pump.hv') * 8,
+        ore('circuitEv') * 12)
+    .fluidInputs(fluid('lubricant') * 16000)
+    .outputs(metaitem('distillation_tower'))
+    .duration(1200).EUt(480)
+    .buildAndRegister()
+
+//NaK "realism"
+mods.gregtech.chemical_reactor.removeByOutput(null, [fluid('sodium_potassium')])
+mods.gregtech.chemical_reactor.recipeBuilder()
+    .inputs(metaitem('dustPotassium') * 4, metaitem('dustSodium'))
+    .fluidOutputs(fluid('sodium_potassium') * 720)
+    .duration(800).EUt(30)
+    .buildAndRegister()
+
+//me out hatch
+mods.gregtech.assembler.removeByOutput([metaitem('me_export_fluid_hatch')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('fluid_hatch.export.ev'), item('appliedenergistics2:drive'),
+        metaitem('super_tank.ev') * 10, item('appliedenergistics2:part:221') * 4)
+    .outputs(metaitem('me_export_fluid_hatch'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me in hatch
+mods.gregtech.assembler.removeByOutput([metaitem('me_import_fluid_hatch')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('fluid_hatch.import.ev'), item('appliedenergistics2:fluid_interface') * 4,
+        metaitem('electric.pump.ev') * 4)
+    .outputs(metaitem('me_import_fluid_hatch'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me out bus
+mods.gregtech.assembler.removeByOutput([metaitem('me_export_item_bus')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('item_bus.export.ev'), item('appliedenergistics2:drive'),
+        metaitem('super_chest.ev') * 10, item('appliedenergistics2:part:220') * 4)
+    .outputs(metaitem('me_export_item_bus'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//me in bus
+mods.gregtech.assembler.removeByOutput([metaitem('me_import_item_bus')], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('item_bus.import.ev'), item('appliedenergistics2:interface') * 4,
+        metaitem('conveyor.module.ev') * 4)
+    .outputs(metaitem('me_import_item_bus'))
+    .duration(400).EUt(480)
+    .buildAndRegister()
+
+//stocking bus and hatch
+for (var stockingType: ['fluid_hatch', 'item_bus']) {
+mods.gregtech.assembler.removeByOutput([metaitem("me_stocking_${stockingType}")], null)
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem("${stockingType}.import.iv"), metaitem("me_import_${stockingType}"),
+        item('nae2:exposer') * 4, item('appliedenergistics2:io_port') * 4,
+        metaitem('field.generator.iv') * 4, item('appliedenergistics2:material', 30) * 16)
+    .fluidInputs(fluid('nether_star') * 2592)
+    .outputs(metaitem("me_stocking_${stockingType}"))
+    .duration(800).EUt(7920)
+    .buildAndRegister()
+}
+
+//lcr, buffed and moved to ass
+crafting.remove('gregtech:large_chemical_reactor')
+mods.gregtech.assembler.recipeBuilder()
+    .inputs(metaitem('chemical_reactor.hv') * 4, metaitem('fluid.regulator.hv') * 2,
+        metaitem('pipeNonupleFluidPolytetrafluoroethylene') * 4,
+        item('gregtech:meta_item_1', 711).withNbt(['GT.PartStats': ['Material': 'gregtech:stainless_steel']]),
+        ore('circuitEv') * 4)
+    .outputs(metaitem('large_chemical_reactor'))
+    .duration(700).EUt(480)
+    .buildAndRegister()
+
+//comp buffs hv-iv
+void makeMotor (String recipeName, ItemStack output,
+                Collection <IIngredient> input, IIngredient fluid,
+                Integer length, Integer energy) {
+
+    crafting.remove(recipeName)
+    mods.gregtech.assembler.removeByOutput([output], null)
+    mods.gregtech.assembler.recipeBuilder()
+        .inputs(input)
+        .outputs(output)
+        .fluidInputs(fluid)
+        .duration(length).EUt(energy)
+        .buildAndRegister()
+}
+//hv motor
+makeMotor('gregtech:electric_motor_hv', metaitem('electric.motor.hv'),
+    [metaitem('cableGtDoubleSilver') * 4, metaitem('stickStainlessSteel') * 4,
+     metaitem('stickSteelMagnetic') * 2, metaitem('boltIronMagnetic') * 16,
+     metaitem('wireFineStainlessSteel') * 64, metaitem('wireGtDoubleElectrum') * 8],
+    fluid('lubricant') * 288, 200, 64)
+//ev motor
+makeMotor('gregtech:electric_motor_ev', metaitem('electric.motor.ev'),
+    [metaitem('cableGtQuadrupleAluminium') * 6, metaitem('stickTitanium') * 6,
+     metaitem('ringTitanium') * 16, metaitem('stickNeodymiumMagnetic') * 4,
+     metaitem('nuggetSteelMagnetic') * 64, metaitem('wireFinePalladium') * 64,
+     metaitem('wireFinePalladium') * 32], fluid('lubricant') * 432,
+    300, 256)
+//iv motor
+makeMotor('gregtech:electric_motor_iv', metaitem('electric.motor.iv'),
+    [metaitem('cableGtQuadrupleTungsten') * 8, metaitem('stickTungstenSteel') * 10,
+     metaitem('ringChrome') * 24, metaitem('gearRhodium') * 4,
+     metaitem('stickLongSamariumMagnetic') * 4, metaitem('wireFineTungstenSteel') * 64,
+     metaitem('wireFineTungstenSteel') * 64, metaitem('wireGtDoubleGraphene') * 12],
+    fluid('lubricant') * 576, 400, 1024)
+
+//luv+ motor removals
+for (var tier: ['luv', 'zpm', 'uv']) {
+    mods.gregtech.assembly_line.removeByOutput([metaitem("electric.motor.${tier}")], null)
+}
+
+//luv motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 8, metaitem('stickLongHsss') * 12,
+        metaitem('gearHsss') * 8, metaitem('nuggetTrinium') * 32,
+        metaitem('gearSmallTungstenCarbide') * 16, metaitem('foilRuridit') * 64,
+        metaitem('wireFineRuridit') * 64)
+    .fluidInputs(fluid('molten.titanium_tungsten_carbide') * 864, fluid('soldering_alloy') * 1152, fluid('lubricant') * 1000)
+    .outputs(metaitem('electric.motor.luv'))
+    .scannerResearch(b -> b.researchStack(metaitem('electric.motor.iv')))
+    .duration(800).EUt(30720)
+    .buildAndRegister()
+
+//zpm motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 12, metaitem('stickLongOsmiridium') * 20,
+        metaitem('plateOsmiridium') * 32, metaitem('nuggetNaquadahEnriched') * 48,
+        metaitem('gearDuranium') * 12, metaitem('wireGtDoubleEuropium') * 64,
+        metaitem('foilNaquadahAlloy') * 64)
+    .fluidInputs(fluid('molten.enderium') * 1152, fluid('soldering_alloy') * 2304, fluid('lubricant') * 6000)
+    .outputs(metaitem('electric.motor.zpm'))
+    .scannerResearch(b -> b.researchStack(metaitem('electric.motor.luv')))
+    .duration(1000).EUt(122880)
+    .buildAndRegister()
+
+//uv motor
+mods.gregtech.assembly_line.recipeBuilder()
+    .inputs(metaitem('stickLongSamariumMagnetic') * 24, metaitem('ingotLutetium') * 64,
+        metaitem('ingotCalifornium') * 64, metaitem('nuggetTrinaquadalloy') * 64,
+        metaitem('wireFineNaquadria') * 64, metaitem('wireGtSingleUraniumRhodiumDinaquadide') * 64,
+        item('nuclearcraft:part', 2) * 64)
+    .fluidInputs(fluid('awakened_draconium') * 1152, fluid('neutronium') * 432,
+        fluid('soldering_alloy') * 6912, fluid('lubricant') * 30000)
+    .outputs(metaitem('electric.motor.uv'))
+    .stationResearch(b -> b.researchStack(metaitem('electric.motor.zpm')).CWUt(32).EUt(30720))
+    .duration(1200).EUt(491520)
     .buildAndRegister()
