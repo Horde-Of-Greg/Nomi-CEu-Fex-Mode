@@ -70,5 +70,4 @@ crafting.remove('gregtech:me_fluid_hatch_output_to_input')
 crafting.remove('gregtech:me_item_bus_input_to_output')
 crafting.remove('gregtech:me_item_bus_output_to_input')
 
-//remove actualization chamber recipes
 

@@ -1,5 +1,7 @@
 package post.main.general.fexmode
 
+import gregtech.api.metatileentity.multiblock.CleanroomType
+
 //Diamond Hook diamonds -> plates
 crafting.remove('hooked:diamond_hook')
 crafting.shapedBuilder()
@@ -468,7 +470,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .circuitMeta(2)
     .fluidInputs(fluid('helium') * 500)
     .outputs(metaitem('ingotStainlessSteel'))
-    .duration(1600).EUt(1920)
+    .duration(3000).EUt(1920)
     .property('temperature', 1700)
     .buildAndRegister()
 
@@ -490,6 +492,60 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .duration(2412).EUt(480)
     .property('temperature', 1800)
     .buildAndRegister()
+
+//titanium loop no longer closed, 2 -> 4 magnesium :problem:, also buffed duration for ebf
+mods.gregtech.electric_blast_furnace.removeByInput(480, [metaitem('dustMagnesium') * 2],
+    [fluid('titanium_tetrachloride') * 1000 * 1000])
+mods.gregtech.electric_blast_furnace.recipeBuilder()
+    .inputs(metaitem('dustMagnesium') * 4)
+    .fluidInputs(fluid('titanium_tetrachloride') * 1100)
+    .outputs(metaitem('ingotHotTitanium'), metaitem('dustMagnesiumChloride') * 6)
+    .duration(4000).EUt(480)
+    .property('temperature', 2141)
+    .buildAndRegister()
+
+//abs recipes completely removed rn cuz of laziness and also i dont like them
+mods.gregtech.alloy_blast_smelter.removeByOutput(null, [fluid('molten.tungsten_steel')])
+mods.gregtech.alloy_blast_smelter.removeByOutput(null, [fluid('molten.tungsten_carbide')])
+
+//theres prob a better way to do this
+for(var tungType: ['n', 'nSteel', 'nCarbide']) {
+    mods.gregtech.electric_blast_furnace.removeByOutput([metaitem("ingotHotTungste${tungType}")], null)
+}
+
+//new tung ebf recipes
+List<String> tungstenTypeDust = [metaitem('dustTungsten'),
+                                 metaitem('dustTungstenSteel'),
+                                 metaitem('dustTungstenCarbide')]
+List<String> tungstenTypeIngot = [metaitem('ingotHotTungsten'),
+                                  metaitem('ingotHotTungstenSteel'),
+                                  metaitem('ingotHotTungstenCarbide')]
+List<Integer> tungSmeltTime = [8200, 10400, 7800]
+List<Integer> tungSmeltTimeGas = [2740, 3460, 2600]
+List<Integer> tungTemp = [3600, 4000, 3058]
+
+//without gas
+for(int i = 0; i < 3 ; i++) {
+    mods.gregtech.electric_blast_furnace.recipeBuilder()
+        .inputs(tungstenTypeDust[i])
+        .circuitMeta(1)
+        .outputs(tungstenTypeIngot[i])
+        .duration(tungSmeltTime[i]).EUt(1920)
+        .property('temperature', tungTemp[i])
+        .buildAndRegister()
+}
+
+//with gas
+for(int i = 0; i < 3 ; i++) {
+    mods.gregtech.electric_blast_furnace.recipeBuilder()
+        .inputs(tungstenTypeDust[i])
+        .circuitMeta(2)
+        .fluidInputs(fluid('argon') * 100)
+        .outputs(tungstenTypeIngot[i])
+        .duration(tungSmeltTimeGas[i]).EUt(7680)
+        .property('temperature', tungTemp[i])
+        .buildAndRegister()
+}
 
 //advanced inscriber changes
 crafting.remove('ae2stuff:recipe1')
@@ -540,6 +596,87 @@ for (var kanthalSilicon: ['Kanthal', 'Silicon']) {
         .buildAndRegister()
 }
 
+//change t2 cir theme to not work with smd also some slight buffs
+//removals
+// Integrated Processor * 1
+mods.gregtech.circuit_assembler.removeByInput(60,
+    [metaitem('circuit_board.plastic'),
+     metaitem('plate.central_processing_unit'),
+     metaitem('component.resistor') * 4,
+     metaitem('component.capacitor') * 4,
+     metaitem('component.transistor') * 4,
+     metaitem('wireFineRedAlloy') * 4],
+    [fluid('soldering_alloy') * 72 * 72])
+// Integrated Processor * 1
+mods.gregtech.circuit_assembler.removeByInput(60,
+    [metaitem('circuit_board.plastic'),
+     metaitem('plate.central_processing_unit'),
+     metaitem('component.resistor') * 4,
+     metaitem('component.capacitor') * 4,
+     metaitem('component.transistor') * 4,
+     metaitem('wireFineRedAlloy') * 4],
+    [fluid('tin') * 144 * 144])
+
+//these are ez cuz no soc recipe
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.assembly')], null)
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.workstation')], null)
+mods.gregtech.circuit_assembler.removeByOutput([metaitem('circuit.mainframe')], null)
+
+//changes
+//integrated processor
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('plate.central_processing_unit') * 2,
+        metaitem('component.resistor') * 4,
+        metaitem('component.capacitor') * 4,
+        metaitem('component.transistor') * 4,
+        metaitem('wireFineRedAlloy') * 8)
+    .fluidInputs(fluid('soldering_alloy') * 72)
+    .outputs(metaitem('circuit.processor'))
+    .duration(300).EUt(60)
+    .buildAndRegister()
+
+//processor assembly
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('circuit.processor') * 2,
+        metaitem('component.inductor') * 8,
+        metaitem('component.capacitor') * 12,
+        metaitem('plate.random_access_memory') * 8,
+        metaitem('wireFineRedAlloy') * 16)
+    .fluidInputs(fluid('soldering_alloy') * 144)
+    .outputs(metaitem('circuit.assembly'))
+    .duration(600).EUt(90)
+    .buildAndRegister()
+
+//workstation
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('circuit_board.plastic'),
+        metaitem('circuit.assembly') * 2,
+        metaitem('component.diode') * 8,
+        metaitem('plate.random_access_memory') * 8,
+        metaitem('wireFineElectrum') * 32,
+        metaitem('nomilabs:boltVibrantAlloy') * 32)
+    .fluidInputs(fluid('soldering_alloy') * 144)
+    .outputs(metaitem('circuit.workstation'))
+    .cleanroom(CleanroomType.CLEANROOM)
+    .duration(600).EUt(120)
+    .buildAndRegister()
+
+//mainframe
+mods.gregtech.circuit_assembler.recipeBuilder()
+    .inputs(metaitem('frameAluminium') * 4,
+        metaitem('circuit.workstation') * 4,
+        metaitem('component.inductor') * 24,
+        metaitem('component.capacitor') * 32,
+        metaitem('plate.random_access_memory') * 16,
+        metaitem('wireGtSingleAnnealedCopper') * 16)
+    .fluidInputs(fluid('soldering_alloy') * 288)
+    .outputs(metaitem('circuit.mainframe'))
+    .cleanroom(CleanroomType.CLEANROOM)
+    .duration(1200).EUt(480)
+    .buildAndRegister()
+
 //pvc plastic board nerfed to return only 1, 4 -> 8 copper foils, duration 25s -> 30s (now matches 1:1 ratio)
 mods.gregtech.chemical_reactor.removeByInput(10,
     [metaitem('platePolyvinylChloride'),
@@ -552,6 +689,31 @@ mods.gregtech.chemical_reactor.recipeBuilder()
     .duration(600).EUt(10)
     .buildAndRegister()
 
+//epoxy board 500mb sulfuric acid -> 2b, 30s at lv -> 30s at hv, buffed and moved to lcr
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('board.epoxy')], null)
+mods.gregtech.large_chemical_reactor.recipeBuilder()
+    .inputs(metaitem('plateEpoxy') * 2, metaitem('foilGold') * 20)
+    .fluidInputs(fluid('sulfuric_acid') * 2000)
+    .outputs(metaitem('board.epoxy'))
+    .duration(600).EUt(480)
+    .buildAndRegister()
+
+//prob useless to have a map here but i wanted to test
+var epoxyCirBoard = [
+    (fluid('iron_iii_chloride')) : 500,
+    (fluid('sodium_persulfate')) : 1000,
+]
+
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('circuit_board.advanced')], null)
+epoxyCirBoard.forEach { IIngredient fluid, Integer amount ->
+    mods.gregtech.large_chemical_reactor.recipeBuilder()
+        .inputs(metaitem('board.epoxy'), metaitem('foilElectrum') * 12, metaitem('cableGtSingleAnnealedCopper') * 6)
+        .fluidInputs(fluid * amount)
+        .outputs(metaitem('circuit_board.advanced'))
+        .duration(700).EUt(480)
+        .buildAndRegister()
+}
+
 //distillation tower buffed and moved to ass
 crafting.remove('gregtech:distillation_tower')
 mods.gregtech.assembler.recipeBuilder()
@@ -563,17 +725,6 @@ mods.gregtech.assembler.recipeBuilder()
     .fluidInputs(fluid('lubricant') * 16000)
     .outputs(metaitem('distillation_tower'))
     .duration(1200).EUt(480)
-    .buildAndRegister()
-
-//titanium loop no longer closed, 2 -> 4 magnesium :problem:, also buffed duration for ebf
-mods.gregtech.electric_blast_furnace.removeByInput(480, [metaitem('dustMagnesium') * 2],
-    [fluid('titanium_tetrachloride') * 1000 * 1000])
-mods.gregtech.electric_blast_furnace.recipeBuilder()
-    .inputs(metaitem('dustMagnesium') * 4)
-    .fluidInputs(fluid('titanium_tetrachloride') * 1100)
-    .outputs(metaitem('ingotHotTitanium'), metaitem('dustMagnesiumChloride') * 6)
-    .duration(4000).EUt(480)
-    .property('temperature', 2141)
     .buildAndRegister()
 
 //NaK "realism"
@@ -720,4 +871,3 @@ mods.gregtech.assembly_line.recipeBuilder()
     .stationResearch(b -> b.researchStack(metaitem('electric.motor.zpm')).CWUt(32).EUt(30720))
     .duration(1200).EUt(491520)
     .buildAndRegister()
-

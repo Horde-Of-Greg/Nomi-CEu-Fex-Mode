@@ -15,16 +15,16 @@ replaceRecipeInput(metaitem('processing_array'),
      [metaitem('robot.arm.iv'), metaitem('hull.iv'), metaitem('robot.arm.iv')],
      [ore('circuitLuv'), metaitem('tool.datastick'), ore('circuitLuv')]])
 
-// Make Rare Earth Centrifuging Output Full Dusts
+// Make Rare Earth Centrifuging Output Full Dusts, nerfed base chance from 6.25% to 3%, oc increase from 1% to 1.2%
 mods.gregtech.centrifuge.removeByInput([metaitem('dustRareEarth')], null)
 mods.gregtech.centrifuge.recipeBuilder()
     .inputs(metaitem('dustRareEarth'))
-    .chancedOutput(metaitem('dustCadmium'), 625, 100)
-    .chancedOutput(metaitem('dustNeodymium'), 625, 100)
-    .chancedOutput(metaitem('dustSamarium'), 625, 100)
-    .chancedOutput(metaitem('dustCerium'), 625, 100)
-    .chancedOutput(metaitem('dustYttrium'), 625, 100)
-    .chancedOutput(metaitem('dustLanthanum'), 625, 100)
+    .chancedOutput(metaitem('dustCadmium'), 300, 120)
+    .chancedOutput(metaitem('dustNeodymium'), 300, 120)
+    .chancedOutput(metaitem('dustSamarium'), 300, 120)
+    .chancedOutput(metaitem('dustCerium'), 300, 120)
+    .chancedOutput(metaitem('dustYttrium'), 300, 120)
+    .chancedOutput(metaitem('dustLanthanum'), 300, 120)
     .duration(64).EUt(VA[LV])
     .buildAndRegister()
 
@@ -65,7 +65,7 @@ ore('dustRadiumSalt').add(item('nomilabs:radiumsalt'))
 // Buff Thorium Yields from Black Granite
 mods.gregtech.macerator.changeByInput([item('gregtech:stone_smooth')], null)
     .changeEachChancedOutput { ChancedItemOutput output ->
-        return chanced(output.ingredient, output.chance, 700) // Original: 1%, + 0.4%, New: 1%, +7%
+        return chanced(output.ingredient, output.chance, 100) // Original: 1%, + 0.4%, New: 1%, +7%, new new: 1%, +1%
     }.replaceAndRegister()
 
 // Add Thorium Yields from Granite + LEGACY: Change Stone Dust to Small Stone Dust
@@ -79,7 +79,7 @@ mods.gregtech.macerator.changeByInput([item('minecraft:stone', 1)], null)
 // Buff Uranium Yields from Red Granite
 mods.gregtech.macerator.changeByInput([item('gregtech:stone_smooth', 1)], null)
     .changeEachChancedOutput { ChancedItemOutput output ->
-        return chanced(output.ingredient, 100, 100) // Original: 0.1%, + 0.05%, New: 1%, +1%
+        return chanced(output.ingredient, 20, 20) // Original: 0.1%, + 0.05%, New: 1%, +1%, new new: 0.2%, +0.2%
     }.replaceAndRegister()
 
 // Maceration of Dilithium and Black Quartz Ore

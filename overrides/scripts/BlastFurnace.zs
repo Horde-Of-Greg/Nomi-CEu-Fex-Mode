@@ -81,7 +81,7 @@ blast_furnace.recipeBuilder()
 	.circuit(2)
 	.outputs([<metaitem:ingotAluminium>])
 	.property("temperature", 1700)
-	.duration(1000).EUt(480)
+	.duration(2000).EUt(480)
 	.buildAndRegister();
 
 
