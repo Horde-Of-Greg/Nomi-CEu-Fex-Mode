@@ -63,3 +63,10 @@ mods.gregtech.fluid_solidifier.recipeBuilder()
     .duration(100).EUt(7)
     .buildAndRegister()
 
+//copper fusion cuz its annoying lategame, this might not be viable in any way but idk, from beryllium and manganese
+mods.gregtech.fusion_reactor.recipeBuilder()
+    .fluidInputs(fluid('beryllium') * 144, fluid('manganese') * 144)
+    .fluidOutputs(fluid('copper') * 144)
+    .property('eu_to_start', 80000000)
+    .duration(4).EUt(12288)
+    .buildAndRegister()
