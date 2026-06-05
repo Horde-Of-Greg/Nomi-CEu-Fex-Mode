@@ -1,6 +1,7 @@
 package post.main.general.fexmode
 
 import gregtech.api.metatileentity.multiblock.CleanroomType
+import static gregtech.api.GTValues.*
 
 //Diamond Hook diamonds -> plates
 crafting.remove('hooked:diamond_hook')
@@ -52,7 +53,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('wireGtDoubleCupronickel') * 12, metaitem('foilBronze') * 12, metaitem('wireFineCopper') * 48)
     .fluidInputs(fluid('tin_alloy') * 288)
     .outputs(item('gregtech:wire_coil:0'))
-    .duration(400).EUt(30)
+    .duration(400).EUt(VA[LV])
     .buildAndRegister()
 
 //kanthal
@@ -64,7 +65,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(ore('wireGtDoubleKanthal') * 12, metaitem('foilAluminium') * 12, ore('wireFineZinc') * 48)
     .fluidInputs(fluid('molybdenum') * 576)
     .outputs(item('gregtech:wire_coil:1'))
-    .duration(600).EUt(120)
+    .duration(600).EUt(VA[MV])
     .buildAndRegister()
 
 //nichrome
@@ -76,7 +77,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(ore('wireGtDoubleNichrome') * 16, metaitem('foilStainlessSteel') * 16, ore('wireFinePlatinum') * 64)
     .fluidInputs(fluid('ultimet') * 576)
     .outputs(item('gregtech:wire_coil:2'))
-    .duration(1000).EUt(480)
+    .duration(1000).EUt(VA[HV])
     .buildAndRegister()
 
 //rtm
@@ -88,7 +89,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(ore('wireGtDoubleRtmAlloy') * 24, metaitem('foilVanadiumSteel') * 24, ore('stickLongTitanium') * 12)
     .fluidInputs(fluid('cobalt') * 1152)
     .outputs(item('gregtech:wire_coil:3'))
-    .duration(1400).EUt(1920)
+    .duration(1400).EUt(VA[EV])
     .buildAndRegister()
 
 //hss-g
@@ -104,7 +105,7 @@ mods.gregtech.assembler.recipeBuilder()
         ore('circuitLuv') * 2)
     .fluidInputs(fluid('molten.hsse') * 1728)
     .outputs(item('gregtech:wire_coil:4'))
-    .duration(2000).EUt(7680)
+    .duration(2000).EUt(VA[IV])
     .buildAndRegister()
 
 //voltage coil changes
@@ -167,7 +168,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('berkelium') * 1296, fluid('liquid_helium') * 4000)
     .outputs(metaitem('voltage_coil.luv'))
     .scannerResearch(b -> b.researchStack(metaitem('voltage_coil.iv')))
-    .duration(1800).EUt(30720)
+    .duration(1800).EUt(VA[LuV])
     .buildAndRegister()
 
 //zpm coil
@@ -181,7 +182,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('californium') * 2592, fluid('liquid_helium') * 16000)
     .outputs(metaitem('voltage_coil.zpm'))
     .stationResearch(b -> b.researchStack(metaitem('voltage_coil.luv')).CWUt(8))
-    .duration(3200).EUt(122880)
+    .duration(3200).EUt(VA[ZPM])
     .buildAndRegister()
 
 //uv coil
@@ -199,7 +200,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('plasma.argon') * 10368, fluid('liquid_helium') * 80000)
     .outputs(metaitem('voltage_coil.uv'))
     .stationResearch(b -> b.researchStack(metaitem('voltage_coil.zpm')).CWUt(64))
-    .duration(5600).EUt(491520)
+    .duration(5600).EUt(VA[UV])
     .buildAndRegister()
 
 //remove all energy hatch recipes
@@ -221,7 +222,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('cableGtSingleTin') * 2, metaitem('voltage_coil.lv'))
     .fluidInputs(fluid('sodium_potassium') * 250)
     .outputs(metaitem('energy_hatch.input.lv'))
-    .duration(200).EUt(30)
+    .duration(200).EUt(VA[LV])
     .buildAndRegister()
 
 //mv energy hatch
@@ -231,7 +232,7 @@ mods.gregtech.assembler.recipeBuilder()
         metaitem('plate.ultra_low_power_integrated_circuit') * 2)
     .fluidInputs(fluid('sodium_potassium') * 500)
     .outputs(metaitem('energy_hatch.input.mv'))
-    .duration(400).EUt(120)
+    .duration(400).EUt(VA[MV])
     .buildAndRegister()
 
 //hv energy hatch
@@ -241,7 +242,7 @@ mods.gregtech.assembler.recipeBuilder()
         metaitem('plate.low_power_integrated_circuit') * 4)
     .fluidInputs(fluid('sodium_potassium') * 1000)
     .outputs(metaitem('energy_hatch.input.hv'))
-    .duration(600).EUt(480)
+    .duration(600).EUt(VA[HV])
     .buildAndRegister()
 
 //ev energy hatch
@@ -251,7 +252,7 @@ mods.gregtech.assembler.recipeBuilder()
         metaitem('plate.power_integrated_circuit') * 6, ore('circuitEv'))
     .fluidInputs(fluid('sodium_potassium') * 2000)
     .outputs(metaitem('energy_hatch.input.ev'))
-    .duration(900).EUt(1920)
+    .duration(900).EUt(VA[EV])
     .buildAndRegister()
 
 //iv energy hatch
@@ -261,7 +262,7 @@ mods.gregtech.assembler.recipeBuilder()
         metaitem('plate.high_power_integrated_circuit') * 12, ore('circuitIv'))
     .fluidInputs(fluid('sodium_potassium') * 4000)
     .outputs(metaitem('energy_hatch.input.iv'))
-    .duration(1400).EUt(7680)
+    .duration(1400).EUt(VA[IV])
     .buildAndRegister()
 
 //luv energy hatch
@@ -274,7 +275,7 @@ mods.gregtech.assembly_line.recipeBuilder()
         fluid('indium_tin_barium_titanium_cuprate') * 720)
     .outputs(metaitem('energy_hatch.input.luv'))
     .scannerResearch(b -> b.researchStack(metaitem('energy_hatch.input.iv')))
-    .duration(2400).EUt(30720)
+    .duration(2400).EUt(VA[LuV])
     .buildAndRegister()
 
 //zpm energy hatch
@@ -287,8 +288,8 @@ mods.gregtech.assembly_line.recipeBuilder()
         fluid('uranium_rhodium_dinaquadide') * 1440)
     .outputs(metaitem('energy_hatch.input.zpm'))
     //this adds research but it doesnt work with the custom CWU and eu parameters
-    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.luv')).CWUt(16).EUt(30720))
-    .duration(3600).EUt(122880)
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.luv')).CWUt(16).EUt(VA[LuV]))
+    .duration(3600).EUt(VA[ZPM])
     .buildAndRegister()
 
 //uv energy hatch
@@ -300,8 +301,8 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('sodium_potassium') * 32000, fluid('soldering_alloy') * 5760,
         fluid('enriched_naquadah_trinium_europium_duranide') * 2880)
     .outputs(metaitem('energy_hatch.input.uv'))
-    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.zpm')).CWUt(64).EUt(122880))
-    .duration(6000).EUt(491520)
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.zpm')).CWUt(64).EUt(VA[ZPM]))
+    .duration(6000).EUt(VA[UV])
     .buildAndRegister()
 
 //uhv energy hatch
@@ -313,8 +314,8 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('sodium_potassium') * 64000, fluid('soldering_alloy') * 11520,
         fluid('ruthenium_trinium_americium_neutronate') * 5760)
     .outputs(metaitem('energy_hatch.input.uhv'))
-    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.uv')).CWUt(256).EUt(1966080))
-    .duration(6400).EUt(1966080)
+    .stationResearch(b -> b.researchStack(metaitem('energy_hatch.input.uv')).CWUt(256).EUt(VA[UHV]))
+    .duration(6400).EUt(VA[UHV])
     .buildAndRegister()
 
 //pyro oven changes
@@ -358,7 +359,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .fluidInputs(fluid('oxygen') * 360)
     .outputs(metaitem('ingotSteel'))
     .property('temperature', 1800)
-    .duration(120).EUt(480)
+    .duration(120).EUt(VA[HV])
     .buildAndRegister()
 
 //silicon boule buff
@@ -373,7 +374,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .circuitMeta(3)
     .fluidInputs(fluid('nitrogen') * 48000)
     .outputs(metaitem('boule.silicon'))
-    .duration(47000).EUt(120)
+    .duration(47000).EUt(VA[MV])
     .property('temperature', 1784)
     .buildAndRegister()
 
@@ -408,7 +409,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('hull.lv'), metaitem('plateIron') * 2, metaitem('plateLead') * 2, metaitem ('ringRubber'))
     .circuitMeta(8)
     .outputs(metaitem('maintenance_hatch'))
-    .duration(200).EUt(30)
+    .duration(200).EUt(VA[LV])
     .buildAndRegister()
 
 //lv circuit assembler
@@ -451,7 +452,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem(''), metaitem('') * 2, metaitem(''))
     .fluidInputs(fluid('') * 144)
     .outputs(metaitem(''))
-    .duration(200).EUt(30)
+    .duration(200).EUt(VA[LV])
     .buildAndRegister()
 */
 
@@ -461,7 +462,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .inputs(metaitem('dustStainlessSteel'))
     .circuitMeta(1)
     .outputs(metaitem('ingotStainlessSteel'))
-    .duration(9000).EUt(480)
+    .duration(9000).EUt(VA[HV])
     .property('temperature', 1700)
     .buildAndRegister()
 
@@ -470,7 +471,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .circuitMeta(2)
     .fluidInputs(fluid('helium') * 500)
     .outputs(metaitem('ingotStainlessSteel'))
-    .duration(3000).EUt(1920)
+    .duration(3000).EUt(VA[EV])
     .property('temperature', 1700)
     .buildAndRegister()
 
@@ -480,7 +481,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .inputs(metaitem('dustKanthal'))
     .circuitMeta(1)
     .outputs(metaitem('ingotHotKanthal'))
-    .duration(3600).EUt(480)
+    .duration(3600).EUt(VA[HV])
     .property('temperature', 1800)
     .buildAndRegister()
 
@@ -489,7 +490,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .circuitMeta(2)
     .fluidInputs(fluid('nitrogen') * 1000)
     .outputs(metaitem('ingotHotKanthal'))
-    .duration(2412).EUt(480)
+    .duration(2412).EUt(VA[HV])
     .property('temperature', 1800)
     .buildAndRegister()
 
@@ -500,7 +501,7 @@ mods.gregtech.electric_blast_furnace.recipeBuilder()
     .inputs(metaitem('dustMagnesium') * 4)
     .fluidInputs(fluid('titanium_tetrachloride') * 1100)
     .outputs(metaitem('ingotHotTitanium'), metaitem('dustMagnesiumChloride') * 6)
-    .duration(4000).EUt(480)
+    .duration(4000).EUt(VA[HV])
     .property('temperature', 2141)
     .buildAndRegister()
 
@@ -513,39 +514,49 @@ for(var tungType: ['n', 'nSteel', 'nCarbide']) {
     mods.gregtech.electric_blast_furnace.removeByOutput([metaitem("ingotHotTungste${tungType}")], null)
 }
 
-//new tung ebf recipes
-List<String> tungstenTypeDust = [metaitem('dustTungsten'),
-                                 metaitem('dustTungstenSteel'),
-                                 metaitem('dustTungstenCarbide')]
-List<String> tungstenTypeIngot = [metaitem('ingotHotTungsten'),
-                                  metaitem('ingotHotTungstenSteel'),
-                                  metaitem('ingotHotTungstenCarbide')]
-List<Integer> tungSmeltTime = [8200, 10400, 7800]
-List<Integer> tungSmeltTimeGas = [2740, 3460, 2600]
-List<Integer> tungTemp = [3600, 4000, 3058]
+//new tungsten/-alloy recipes
+def tungstenTypes = [
+    "Tungsten": [
+        smeltTime: 8200,
+        smeltTimeGas: 2740,
+        temperature: 3600,
+    ],
+    "TungstenSteel": [
+        smeltTime: 10400,
+        smeltTimeGas: 3460,
+        temperature: 4000,
+    ],
+    "TungstenCarbide": [
+        smeltTime: 7800,
+        smeltTimeGas: 2600,
+        temperature: 3058,
+    ],
+]
 
 //without gas
-for(int i = 0; i < 3 ; i++) {
+tungstenTypes.forEach { String type, Map ebfParams ->
     mods.gregtech.electric_blast_furnace.recipeBuilder()
-        .inputs(tungstenTypeDust[i])
+        .inputs(metaitem("dust${type}"))
         .circuitMeta(1)
-        .outputs(tungstenTypeIngot[i])
-        .duration(tungSmeltTime[i]).EUt(1920)
-        .property('temperature', tungTemp[i])
+        .outputs(metaitem("ingotHot${type}"))
+        .duration(ebfParams.smeltTime).EUt(VA[IV])
+        .property('temperature', ebfParams.temperature)
         .buildAndRegister()
 }
 
 //with gas
-for(int i = 0; i < 3 ; i++) {
+tungstenTypes.forEach { String type, Map ebfParams ->
     mods.gregtech.electric_blast_furnace.recipeBuilder()
-        .inputs(tungstenTypeDust[i])
+        .inputs(metaitem("dust${type}"))
         .circuitMeta(2)
         .fluidInputs(fluid('argon') * 100)
-        .outputs(tungstenTypeIngot[i])
-        .duration(tungSmeltTimeGas[i]).EUt(7680)
-        .property('temperature', tungTemp[i])
+        .outputs(metaitem("ingotHot${type}"))
+        .duration(ebfParams.smeltTimeGas).EUt(VA[LuV])
+        .property('temperature', ebfParams.temperature)
         .buildAndRegister()
 }
+
+
 
 //advanced inscriber changes
 crafting.remove('ae2stuff:recipe1')
@@ -568,7 +579,7 @@ mods.gregtech.assembler.recipeBuilder()
         metaitem('circuit.integrated').withNbt(['Configuration' : 0]) * 16)
     .fluidInputs(fluid('plastic') * 576)
     .outputs(item('nae2:upgrade:2'))
-    .duration(300).EUt(480)
+    .duration(300).EUt(VA[HV])
     .buildAndRegister()
 
 //mm stuff changes
@@ -592,7 +603,7 @@ for (var kanthalSilicon: ['Kanthal', 'Silicon']) {
         .inputs(metaitem("ingotHot${kanthalSilicon}"))
         .fluidInputs(fluid('ice') * 300)
         .outputs(metaitem("ingot${kanthalSilicon}"))
-        .duration(800).EUt(120)
+        .duration(800).EUt(VA[MV])
         .buildAndRegister()
 }
 
@@ -633,7 +644,7 @@ mods.gregtech.circuit_assembler.recipeBuilder()
         metaitem('wireFineRedAlloy') * 8)
     .fluidInputs(fluid('soldering_alloy') * 72)
     .outputs(metaitem('circuit.processor'))
-    .duration(300).EUt(60)
+    .duration(300).EUt(VHA[MV])
     .buildAndRegister()
 
 //processor assembly
@@ -660,7 +671,7 @@ mods.gregtech.circuit_assembler.recipeBuilder()
     .fluidInputs(fluid('soldering_alloy') * 144)
     .outputs(metaitem('circuit.workstation'))
     .cleanroom(CleanroomType.CLEANROOM)
-    .duration(600).EUt(120)
+    .duration(600).EUt(VA[MV])
     .buildAndRegister()
 
 //mainframe
@@ -674,7 +685,7 @@ mods.gregtech.circuit_assembler.recipeBuilder()
     .fluidInputs(fluid('soldering_alloy') * 288)
     .outputs(metaitem('circuit.mainframe'))
     .cleanroom(CleanroomType.CLEANROOM)
-    .duration(1200).EUt(480)
+    .duration(1200).EUt(VA[HV])
     .buildAndRegister()
 
 //pvc plastic board nerfed to return only 1, 4 -> 8 copper foils, duration 25s -> 30s (now matches 1:1 ratio)
@@ -695,22 +706,62 @@ mods.gregtech.large_chemical_reactor.recipeBuilder()
     .inputs(metaitem('plateEpoxy') * 2, metaitem('foilGold') * 20)
     .fluidInputs(fluid('sulfuric_acid') * 2000)
     .outputs(metaitem('board.epoxy'))
-    .duration(600).EUt(480)
+    .duration(600).EUt(VA[HV])
     .buildAndRegister()
 
 //prob useless to have a map here but i wanted to test
-var epoxyCirBoard = [
-    (fluid('iron_iii_chloride')) : 500,
-    (fluid('sodium_persulfate')) : 1000,
+def boardFluids = [
+    { int amount -> fluid('iron_iii_chloride') * amount },
+    { int amount -> fluid('sodium_persulfate') * (amount * 2) },
 ]
 
 mods.gregtech.chemical_reactor.removeByOutput([metaitem('circuit_board.advanced')], null)
-epoxyCirBoard.forEach { IIngredient fluid, Integer amount ->
+boardFluids.forEach { boardFluid ->
     mods.gregtech.large_chemical_reactor.recipeBuilder()
         .inputs(metaitem('board.epoxy'), metaitem('foilElectrum') * 12, metaitem('cableGtSingleAnnealedCopper') * 6)
-        .fluidInputs(fluid * amount)
+        .fluidInputs(boardFluid(500))
         .outputs(metaitem('circuit_board.advanced'))
-        .duration(700).EUt(480)
+        .duration(700).EUt(VA[HV])
+        .buildAndRegister()
+}
+
+//fiber epoxy rework
+mods.thermalexpansion.compactor.removeByOutput(metaitem('plateReinforcedEpoxyResin'))
+mods.gregtech.fluid_solidifier.removeByOutput([metaitem('plateReinforcedEpoxyResin')], null)
+mods.gregtech.cutter.removeByOutput([metaitem('plateReinforcedEpoxyResin')], null)
+mods.gregtech.extruder.removeByOutput([metaitem('plateReinforcedEpoxyResin')], null)
+mods.gregtech.chemical_bath.removeByOutput([metaitem('plateReinforcedEpoxyResin')], null)
+mods.gregtech.large_chemical_reactor.recipeBuilder()
+    .inputs(metaitem('carbon.fibers') * 6)
+    .fluidInputs(fluid('epoxy') * 288)
+    .circuitMeta(25)
+    .fluidOutputs(fluid('reinforced_epoxy_resin') * 144)
+    .duration(240).EUt(VA[EV])
+    .buildAndRegister()
+
+mods.gregtech.autoclave.recipeBuilder()
+    .inputs(metaitem('board.epoxy'))
+    .fluidInputs(fluid('reinforced_epoxy_resin') * 144)
+    .outputs(metaitem('plateReinforcedEpoxyResin'))
+    .duration(500).EUt(VA[HV])
+    .buildAndRegister()
+
+//t4 boards buff
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('board.fiber_reinforced')], null)
+mods.gregtech.large_chemical_reactor.recipeBuilder()
+    .inputs(metaitem('plateReinforcedEpoxyResin'), metaitem('foilManganese') * 24)
+    .fluidInputs(fluid('sulfuric_acid') * 1000)
+    .outputs(metaitem('board.fiber_reinforced'))
+    .duration(600).EUt(VHA[EV])
+    .buildAndRegister()
+
+mods.gregtech.chemical_reactor.removeByOutput([metaitem('circuit_board.extreme')], null)
+boardFluids.forEach { boardFluid ->
+    mods.gregtech.large_chemical_reactor.recipeBuilder()
+        .inputs(metaitem('board.fiber_reinforced'), metaitem('foilAluminium') * 16, metaitem('cableGtSingleCobalt') * 8)
+        .fluidInputs(boardFluid(1000))
+        .outputs(metaitem('circuit_board.extreme'))
+        .duration(500).EUt(VA[EV])
         .buildAndRegister()
 }
 
@@ -724,7 +775,7 @@ mods.gregtech.assembler.recipeBuilder()
         ore('circuitEv') * 12)
     .fluidInputs(fluid('lubricant') * 16000)
     .outputs(metaitem('distillation_tower'))
-    .duration(1200).EUt(480)
+    .duration(1200).EUt(VA[HV])
     .buildAndRegister()
 
 //NaK "realism"
@@ -732,7 +783,7 @@ mods.gregtech.chemical_reactor.removeByOutput(null, [fluid('sodium_potassium')])
 mods.gregtech.chemical_reactor.recipeBuilder()
     .inputs(metaitem('dustPotassium') * 4, metaitem('dustSodium'))
     .fluidOutputs(fluid('sodium_potassium') * 720)
-    .duration(800).EUt(30)
+    .duration(800).EUt(VA[LV])
     .buildAndRegister()
 
 //me out hatch
@@ -741,7 +792,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('fluid_hatch.export.ev'), item('appliedenergistics2:drive'),
         metaitem('super_tank.ev') * 10, item('appliedenergistics2:part:221') * 4)
     .outputs(metaitem('me_export_fluid_hatch'))
-    .duration(400).EUt(480)
+    .duration(400).EUt(VA[HV])
     .buildAndRegister()
 
 //me in hatch
@@ -750,7 +801,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('fluid_hatch.import.ev'), item('appliedenergistics2:fluid_interface') * 4,
         metaitem('electric.pump.ev') * 4)
     .outputs(metaitem('me_import_fluid_hatch'))
-    .duration(400).EUt(480)
+    .duration(400).EUt(VA[HV])
     .buildAndRegister()
 
 //me out bus
@@ -759,7 +810,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('item_bus.export.ev'), item('appliedenergistics2:drive'),
         metaitem('super_chest.ev') * 10, item('appliedenergistics2:part:220') * 4)
     .outputs(metaitem('me_export_item_bus'))
-    .duration(400).EUt(480)
+    .duration(400).EUt(VA[HV])
     .buildAndRegister()
 
 //me in bus
@@ -768,7 +819,7 @@ mods.gregtech.assembler.recipeBuilder()
     .inputs(metaitem('item_bus.import.ev'), item('appliedenergistics2:interface') * 4,
         metaitem('conveyor.module.ev') * 4)
     .outputs(metaitem('me_import_item_bus'))
-    .duration(400).EUt(480)
+    .duration(400).EUt(VA[HV])
     .buildAndRegister()
 
 //stocking bus and hatch
@@ -792,7 +843,7 @@ mods.gregtech.assembler.recipeBuilder()
         item('gregtech:meta_item_1', 711).withNbt(['GT.PartStats': ['Material': 'gregtech:stainless_steel']]),
         ore('circuitEv') * 4)
     .outputs(metaitem('large_chemical_reactor'))
-    .duration(700).EUt(480)
+    .duration(700).EUt(VA[HV])
     .buildAndRegister()
 
 //comp buffs hv-iv
@@ -844,7 +895,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('molten.titanium_tungsten_carbide') * 864, fluid('soldering_alloy') * 1152, fluid('lubricant') * 1000)
     .outputs(metaitem('electric.motor.luv'))
     .scannerResearch(b -> b.researchStack(metaitem('electric.motor.iv')))
-    .duration(800).EUt(30720)
+    .duration(800).EUt(VA[LuV])
     .buildAndRegister()
 
 //zpm motor
@@ -856,7 +907,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('molten.enderium') * 1152, fluid('soldering_alloy') * 2304, fluid('lubricant') * 6000)
     .outputs(metaitem('electric.motor.zpm'))
     .scannerResearch(b -> b.researchStack(metaitem('electric.motor.luv')))
-    .duration(1000).EUt(122880)
+    .duration(1000).EUt(VA[ZPM])
     .buildAndRegister()
 
 //uv motor
@@ -868,6 +919,7 @@ mods.gregtech.assembly_line.recipeBuilder()
     .fluidInputs(fluid('awakened_draconium') * 1152, fluid('neutronium') * 432,
         fluid('soldering_alloy') * 6912, fluid('lubricant') * 30000)
     .outputs(metaitem('electric.motor.uv'))
-    .stationResearch(b -> b.researchStack(metaitem('electric.motor.zpm')).CWUt(32).EUt(30720))
-    .duration(1200).EUt(491520)
+    .stationResearch(b -> b.researchStack(metaitem('electric.motor.zpm')).CWUt(32).EUt(VA[LuV]))
+    .duration(1200).EUt(VA[UV])
     .buildAndRegister()
+
